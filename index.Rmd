@@ -6,11 +6,8 @@ output: html_document
 
 My website...
 
+I'm a messy eater!
 
-```{r echo=FALSE,warning=FALSE,message=FALSE,fig.align='center',fig.width=3,fig.height=3}
-library(tidyverse)
-mpg %>% 
-  ggplot(aes(x=displ,y=cty)) +
-  geom_smooth()
+![](pics/hamburger.jpeg)
 
-```
+

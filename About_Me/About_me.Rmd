@@ -1,6 +1,13 @@
 ---
-title: "About_Me"
+title: "About Me"
 output: html_document
+pagetitle: About Me
+
+
+
+# About Me
+
+## Here is my CV
 ---
 
 ```{r setup, include=FALSE}

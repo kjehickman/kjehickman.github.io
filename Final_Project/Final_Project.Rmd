@@ -6,6 +6,8 @@ output: html_document
 TOC: TRUE
 ---
 
+## [Home](https://kjehickman.github.io/) | [Final Project](https://kjehickman.github.io/Final_Project/Final_Project.html) | [About Me](https://kjehickman.github.io/About_Me/About_me.html)
+
 ```{r optionsetup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ```

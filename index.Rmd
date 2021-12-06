@@ -6,7 +6,7 @@ output: html_document
 
 # My website...
 
-## [HOME](https://kjehickman.github.io/) | [Final Project](https://kjehickman.github.io/Final_Project/Final_Project.html) | [About Me](https://kjehickman.github.io/About_Me/About_me.html)
+## [Home](https://kjehickman.github.io/) | [Final Project](https://kjehickman.github.io/Final_Project/Final_Project.html) | [About Me](https://kjehickman.github.io/About_Me/About_me.html)
 
 ![](pics/hamburger.jpeg)
 A plot:

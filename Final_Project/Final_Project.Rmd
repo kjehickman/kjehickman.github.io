@@ -15,6 +15,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 # Bacterial-Fungal Interactions in Mangrove Roots 
 
 ## <b>Introduction</b>
+
 <br>
 This project aims to illuminate potential interactions between bacterial and fungal species in terms of community assembly. The analysis is multi-faceted and will include various comparisons between the subjects of research.
 <br><br>
@@ -50,6 +51,8 @@ plot_bar2 <- function (physeq, x = "Sample", y = "Abundance", fill = NULL,
 }
 ```
 <br>
+
+
 ## Bacterial and Fungal Community Data
 
 We're dealing with several datasets that illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **bacterial** and **fungal** communities by *Phyla*. 
@@ -69,7 +72,11 @@ WHY ARE ALL THE VARAIBLES "X"?
 <br><br>
 
 # <b>Analysis 1</b>
+
+
 <br>
+
+
 ## MRM distance of geographical location and sample similarity
 
 Let's start this analysis by making a matrix with the geographical locations of the samples. Then we can make another matrix with the operational taxanomic units to display sample diversity. 
@@ -94,27 +101,42 @@ MRM1 <- ecodist::MRM(otu_dist ~ location_dist)
 
 MRM1
 ```
-
+As you move NE the chances of bact is higher
 I SHOULD PROBABLY SINK THAT TO ANOTHER OUTPUT FILE... LET ME DOUBLE-CHECK. WHAT WOULD I DO WITH THE FILE AND WHAT WOULD BE THE POINT? 
 SHOULD I ALSO REMOVE THE DISPLAYING OF THE MATRICES?
 <br>
 P.S. both of those printed matrices look like shit
 <br>
-While the p-value is statistically significant, the correlation between diversity and pxosimity is rather weak. Therefore, let's run a few more tests to get a more definitive idea of what's going on. 
+While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. Therefore, let's run a few more tests to get a more definitive idea of what's going on. 
 
 Aaaand just for funsies, let's visualize the otu_dist as a heatmap:
 
-```{r heatmap, echo=TRUE}
+```{r heatmap, echo=FALSE}
 otu_dist %>% as.matrix() %>% heatmap()
 
 samp <- data.frame(sample_data(full))
 
-#glm(formula = "samp$Microbe" ~ "samp$Lon" + "samp$Lat", data = samp)
+samp$Microbe %>% table
+
+samp <- samp %>% 
+  mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
+                          TRUE ~ FALSE)) %>% 
+   mutate(Bact = as.logical(Bact))
 
 ```
+Here is another chunk that will make the glm
 
+```{r heatmap, echo=FALSE}
+
+glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
+
+```
 <br><br>
+
+
 ## Diversity of Phyla by Structure
+
+
 <br><br>
 So rather than predict diversity by geographical proximity, how about we see how host structure plays into microbial community diversity. 
 
@@ -132,8 +154,15 @@ merge_samples(full_structures, "Structure") %>%
 
 Now that we can visualize those relationships, how accurate are our perceptions of correlation? In other words, do the patterns we project correlate to reality? Let's use a generalized linear model to find out. 
 
-```{r glm structure, echo=TRUE}
-#glm(formula = "Microbe" ~ "Host" + "Structure", data = full_structures)
+```{r glm structure, echo=FALSE, include=TRUE}
+samp2 <- data.frame(sample_data(full_structures))
+
+samp2 <- samp2 %>% 
+  mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
+                          TRUE ~ FALSE)) %>% 
+   mutate(Bact = as.logical(Bact))
+samp2
+glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
 ```
 MUST FIGURE OUT HOW TO STOP THE TOP OF GRAPH FROM GETTING CUT-OFF
 
@@ -304,12 +333,20 @@ plot_richness(full,
   theme_minimal()
 ```
 
-CREATE A FOLDER FOR GRAPHS AND EXPORT THEM
 
 ## Ordination
 
+EXPLAIN ORDINATION HERE AND SAY WHAT I WANT TO USE IT FOR
 
-
+```{r rich boxplot, echo=TRUE}
+plot_richness(full, 
+              x = "Microbe",
+              measures = c("Observed","Shannon"), 
+              color = "Structure", 
+              sortby = "Observed") +
+  geom_boxplot(alpha = .5) +
+  theme_minimal()
+```
 
 
 

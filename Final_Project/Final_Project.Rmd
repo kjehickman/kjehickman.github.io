@@ -2,7 +2,12 @@
 title: "Final Project"
 pagetitle: "BIOL 3100"
 author: "Kate Hickman"
-output: html_document
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
 TOC: TRUE
 ---
 
@@ -17,7 +22,7 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ## <b>Introduction</b>
 
 <br>
-This project aims to illuminate potential interactions between bacterial and fungal species in terms of community assembly. The analysis is multi-faceted and will include various comparisons between the subjects of research.
+This project aims to illuminate potential interactions between bacterial and fungal species in terms of community assembly as a funciton of location, host plant or plant structure. The analysis is multi-faceted and will include various comparisons between the subjects of research.
 <br><br>
 
 # <b>Data Analysis</b>
@@ -57,18 +62,19 @@ plot_bar2 <- function (physeq, x = "Sample", y = "Abundance", fill = NULL,
 
 We're dealing with several datasets that illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **bacterial** and **fungal** communities by *Phyla*. 
 
-Let's load the data and take a look at it:
-
+The sample data contains a list of variables that present themselves as interesting predictors of community assembly, which we will use microbe type and taxa as a proxy for. Below you will see the parameters for samples taken from two hosts at seven different sites in south east Asia.
 
 ```{r data load, echo=TRUE, include=TRUE, eval=TRUE}
 full <- readRDS("./bact_and_fungi_clean_ps_object")
 
-kableExtra::kable(full@sam_data[1:5, ]) %>% 
+full_sam <- full@sam_data %>% as("data.frame")
+
+kableExtra::kable(full_sam[1:5, ]) %>% 
   kableExtra::kable_classic()
 ```
 
-Now that we can see the data, we'll be focusing on Structure, Microbe, Lat and Long. 
-WHY ARE ALL THE VARAIBLES "X"? 
+Now that we can see the observed parameters, can can begin to ask questions about the data. For the purposes of this analysis, we'll be focusing on Structure, Microbe, Lat and Long. 
+ 
 <br><br>
 
 # <b>Analysis 1</b>
@@ -83,17 +89,13 @@ Let's start this analysis by making a matrix with the geographical locations of 
 <br>
 Once we have made those matrices, we can run a "multiple regression of matrices" test, using a response matrix (in this case otu_dist) as a function of the explanatory matrix (location_dist).
 
-```{r martices, echo=TRUE}
+```{r martices, echo=FALSE}
 lat <- full@sam_data$Lat %>% as.numeric()
 lon <- full@sam_data$Lon %>% as.numeric()
 
 location_dist <- data.frame(lat, lon) %>% dist()
 
-glimpse(location_dist)
-
 otu_dist <- otu_table(full) %>% dist()
-
-glimpse(otu_dist)
 
 otu_dist <- vegan::vegdist(otu_table(full), na.rm = TRUE)
 
@@ -102,10 +104,8 @@ MRM1 <- ecodist::MRM(otu_dist ~ location_dist)
 MRM1
 ```
 As you move NE the chances of bact is higher
-I SHOULD PROBABLY SINK THAT TO ANOTHER OUTPUT FILE... LET ME DOUBLE-CHECK. WHAT WOULD I DO WITH THE FILE AND WHAT WOULD BE THE POINT? 
-SHOULD I ALSO REMOVE THE DISPLAYING OF THE MATRICES?
+I SHOULD PROBABLY SINK THAT TO ANOTHER OUTPUT FILE... LET ME DOUBLE-CHECK. WHAT WOULD I DO WITH THE FILE 
 <br>
-P.S. both of those printed matrices look like shit
 <br>
 While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. Therefore, let's run a few more tests to get a more definitive idea of what's going on. 
 
@@ -116,17 +116,14 @@ otu_dist %>% as.matrix() %>% heatmap()
 
 samp <- data.frame(sample_data(full))
 
-samp$Microbe %>% table
-
 samp <- samp %>% 
   mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
                           TRUE ~ FALSE)) %>% 
    mutate(Bact = as.logical(Bact))
-
 ```
-Here is another chunk that will make the glm
+Here is another chunk that will make the glm. RRATHER THAN SHOW CODE, EXPLAIN USING LAT/LONG AND GIVE THE RESULT. EXPLAIN MODELS THEN GIVE RESULT.
 
-```{r heatmap, echo=FALSE}
+```{r glm bact, echo=FALSE}
 
 glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
 
@@ -143,7 +140,6 @@ So rather than predict diversity by geographical proximity, how about we see how
 After removing the "Blanks" from the sample data for Structure, we can create a stacked bar graph that displays various phyla and their relative abundance by structure. 
 
 ```{r phyla ~ structure, echo=TRUE}
-full@sam_data %>% names
 full_structures <- full %>% subset_samples(Structure != "Blank")
 
 # this shows phylum abundance by structure
@@ -161,12 +157,11 @@ samp2 <- samp2 %>%
   mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
                           TRUE ~ FALSE)) %>% 
    mutate(Bact = as.logical(Bact))
-samp2
+
 glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
 ```
 MUST FIGURE OUT HOW TO STOP THE TOP OF GRAPH FROM GETTING CUT-OFF
 
-MUST ALSO KNOW WHY GLM ISN'T WORKING
 <br><br><br>
 
 There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance by Kingdom. 
@@ -180,7 +175,8 @@ full_nonarch %>%
   plot_bar(fill="Kingdom")
 ```
 
-SO.. HOW DOES STRUCTRE AFFECT DIVERSITY?? ... AND WHY DOESN'T THIS GRAPH WORK?
+SO.. HOW DOES STRUCTURE AFFECT DIVERSITY?? ... AND WHY DOESN'T THIS GRAPH WORK?
+NEED TO MERGE SAMPLES BEFRE THIS WILL WORK, MERGE BY KINGDOM?
 
 <br><br>
 
@@ -193,14 +189,17 @@ Now that we've taken a look at structure, we can break down the Phyla distributi
 The first graph shows the phyla distribution as differentiated by host. However, the downside to this graph is that the Phyla are sorted alphabetically rather than by microbe-type. 
 <br><br>
 The second graph has undergone some modification, based off a few suspicions: 
+<br><br>
   1. I suspect both the host and the structure impact the diversity of the microbial community<br>
-  2. The impact of those variables will likely be different for Fungi vs. Bacteria<br>
+<br><br>
+2. The impact of those variables will likely be different for Fungi vs. Bacteria<br>
 <br><br>
 Thus, the second graph shows a separate column for the outcome of the three variables interacting. The first 8 rows go through the structures of *Avicennia alba* by microbe, and the second 8 do the same thing for *Sonneratia alba*. 
   
 
-```{r }
+```{r largefig, echo=FALSE}
 
+# can add these fig dimensions later: fig.align='center', echo=FALSE, fig.height= "3", fig.width= "3"
 full_nonarch %>% 
   subset_samples(Host != "Blank") %>% 
   merge_samples("Host") %>% 
@@ -219,8 +218,8 @@ full %>%
   plot_bar(fill="Phylum") +
   scale_fill_viridis_d()
 ```
-
-LET'S MAKE THIS GRAPH LARGER
+<br><br><br><br>
+LET'S MAKE THIS GRAPH LARGER: in code chunk, 
 <br><br>
 Alright, so that graph is pretty hard to read. Merging those variables made the data a little messy, so it needs to be restored. Once that is accomplished, we can split the previous graph up into several graphs that make the data a bit more digestible. 
 
@@ -246,9 +245,11 @@ full2@sam_data$Microbe <- row.names(full2@sam_data) %>% str_split("_") %>% map_c
 
 # this graph shows separate columns for each host, and is wrapped by structure
 full2 %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
   facet_wrap(~Structure)
+#added linw 248
 ```
 <br><br><br> Now that we can see the diversity of phyla split by host and structure, we can further our analysis to include the microbes. 
 <br><br>To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
@@ -257,6 +258,7 @@ full2 %>%
 
 # here is our bacterial plot
 bact_plot <- full2 %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>% 
   subset_taxa(Kingdom =="Bacteria") %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
@@ -266,6 +268,7 @@ bact_plot
 
 # here is our fungal plot
 fung_plot <- full2 %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>% 
   subset_taxa(Kingdom =="Fungi") %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
@@ -274,10 +277,12 @@ fung_plot <- full2 %>%
 fung_plot
 
 # this will combine the plots to show phyla sorted by kingdom
-bact_plot / fung_plot
+#bact_plot / fung_plot
+# REMOVE THIS--ITS TOO MUCH
 ```
 
 THESE AXES NEED TO BE MESSED WITH: make the y-axes say fungal/bacterial abundance, fix the legend
+*** ALSO NEED TO TRANSFORM TO RELATIVE ABUDANCE AND MAKE Y-AXIS 0-1
 
 PROBABLY WANT FEWER BAR GRAPHS AND MORE ANALYSES THROUGHOUT 
 
@@ -296,9 +301,10 @@ GP <- prune_species(speciesSums(full) > 0, full)
 GP %>% 
   subset_samples(Host != "Blank") %>%
   plot_richness(x = "Structure", 
-              measures=c("Chao1", "Shannon"),
+              measures=c("Observed", "Shannon"),
               sortby = "Observed")
 ```
+
 
 This graph illustrates the greater number of diversity measures in sediment, reflecting the information provided in "WHICH OTHER PLOTS SHOW HIGHER DIVERSITY IN SEDIMENT?"
 <br><br><br>
@@ -338,7 +344,7 @@ plot_richness(full,
 
 EXPLAIN ORDINATION HERE AND SAY WHAT I WANT TO USE IT FOR
 
-```{r rich boxplot, echo=TRUE}
+```{r rich, echo=TRUE}
 plot_richness(full, 
               x = "Microbe",
               measures = c("Observed","Shannon"), 

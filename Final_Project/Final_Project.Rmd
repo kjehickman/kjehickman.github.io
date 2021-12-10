@@ -77,6 +77,18 @@ Now that we can see the observed parameters, can can begin to ask questions abou
  
 <br><br>
 
+It may also be useful to understand what taxonomic groups are present in our samples. 
+
+```{r tax_table, echo=FALSE}
+full_tax <- as.data.frame(full@tax_table)
+
+#plot_tree(full_tax, color = "Kingdom", size = "Structure", sizebase = 2, label.tips = "taxa_names")
+#?plot_tree()
+#phy_tree(full@tax_table)
+```
+HELP WITH PLOT_TREE
+<br>
+
 # <b>Analysis 1</b>
 
 
@@ -86,7 +98,7 @@ Now that we can see the observed parameters, can can begin to ask questions abou
 ## MRM distance of geographical location and sample similarity
 
 Let's start this analysis by making a matrix with the geographical locations of the samples. Then we can make another matrix with the operational taxanomic units to display sample diversity. 
-<br>
+<br><br>
 Once we have made those matrices, we can run a "multiple regression of matrices" test, using a response matrix (in this case otu_dist) as a function of the explanatory matrix (location_dist).
 
 ```{r martices, echo=FALSE}
@@ -103,14 +115,12 @@ MRM1 <- ecodist::MRM(otu_dist ~ location_dist)
 
 MRM1
 ```
-As you move NE the chances of bact is higher
-I SHOULD PROBABLY SINK THAT TO ANOTHER OUTPUT FILE... LET ME DOUBLE-CHECK. WHAT WOULD I DO WITH THE FILE 
-<br>
-<br>
+As you move northeast, the chances of a given microbe being bacteria increases. 
+<br><br>
 While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. Therefore, let's run a few more tests to get a more definitive idea of what's going on. 
-
-Aaaand just for funsies, let's visualize the otu_dist as a heatmap:
-
+<br><br>
+To illustrate the similarity visually, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples similarity to the other samples in terms of the community composition.
+<br><br>
 ```{r heatmap, echo=FALSE}
 otu_dist %>% as.matrix() %>% heatmap()
 
@@ -130,6 +140,10 @@ glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
 ```
 <br><br>
 
+
+# <b>Analysis 2</b>
+
+<br><br>
 
 ## Diversity of Phyla by Structure
 
@@ -162,17 +176,21 @@ glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summ
 ```
 MUST FIGURE OUT HOW TO STOP THE TOP OF GRAPH FROM GETTING CUT-OFF
 
+
 <br><br><br>
 
 There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance by Kingdom. 
 
 ```{r nonbact parameters, echo=TRUE}
-full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
+# full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
 
 # quick plot to look at kingdom-level taxonomy
-full_nonarch %>% 
+tax_table(full) %>% 
+  merge_taxa("Phylum") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>%
   plot_bar(fill="Kingdom")
+
+
 ```
 
 SO.. HOW DOES STRUCTURE AFFECT DIVERSITY?? ... AND WHY DOESN'T THIS GRAPH WORK?
@@ -180,9 +198,7 @@ NEED TO MERGE SAMPLES BEFRE THIS WILL WORK, MERGE BY KINGDOM?
 
 <br><br>
 
-# <b>Analysis 2</b>
-
-## Alpha diversity and relative class abundance v location
+## Relative Class Abundance by Location
 
 Now that we've taken a look at structure, we can break down the Phyla distribution by host. We had two types of hosts in the data-collection: *Avicennia alba* and *Sonneratia alba*. 
 <br><br>
@@ -190,12 +206,12 @@ The first graph shows the phyla distribution as differentiated by host. However,
 <br><br>
 The second graph has undergone some modification, based off a few suspicions: 
 <br><br>
-  1. I suspect both the host and the structure impact the diversity of the microbial community<br>
+  1. I suspect both the host and the structure impact the diversity of the microbial community
 <br><br>
 2. The impact of those variables will likely be different for Fungi vs. Bacteria<br>
 <br><br>
 Thus, the second graph shows a separate column for the outcome of the three variables interacting. The first 8 rows go through the structures of *Avicennia alba* by microbe, and the second 8 do the same thing for *Sonneratia alba*. 
-  
+<br><br>
 
 ```{r largefig, echo=FALSE}
 
@@ -262,9 +278,26 @@ bact_plot <- full2 %>%
   subset_taxa(Kingdom =="Bacteria") %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
-  facet_wrap(~Structure)
+  facet_wrap(~Structure) 
+#   labs(title = "Bacterial Community by Host Structure") +
+#  theme(plot.title = element_text(size = 3))
 
 bact_plot
+
+# this will combine the plots to show phyla sorted by kingdom
+#bact_plot / fung_plot
+# REMOVE THIS--ITS TOO MUCH
+```
+
+HELP WITH AXIS TITLES
+
+<br><br>
+This plot shows fungal community assembly, differentiated by the host plant's sturcture. The most uniform communtiy appears to exist on the fruit, whereas the most speciose community exists in the sediment. This trend of diverse community in sediment is observed in bacterial communities as well.
+<br><br>
+Both bacterial and fungal communities appear to be more diverse in submerged environments, such as the pneumatophores and sediment, as compared to terrestrial structures. This finding is rather ironic, considering that much more is known, generally speaking, about terrestrial fungi than marine fungi. The number of "unidentified" species in these samples is liekly quite high.
+<br><br>
+
+```{r fung plat, echo=TRUE}
 
 # here is our fungal plot
 fung_plot <- full2 %>% 
@@ -273,24 +306,24 @@ fung_plot <- full2 %>%
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
   facet_wrap(~Structure)
+#  theme(title = "Fungal Community by Host Structure")
 
 fung_plot
-
-# this will combine the plots to show phyla sorted by kingdom
-#bact_plot / fung_plot
-# REMOVE THIS--ITS TOO MUCH
 ```
+
 
 THESE AXES NEED TO BE MESSED WITH: make the y-axes say fungal/bacterial abundance, fix the legend
 *** ALSO NEED TO TRANSFORM TO RELATIVE ABUDANCE AND MAKE Y-AXIS 0-1
-
-PROBABLY WANT FEWER BAR GRAPHS AND MORE ANALYSES THROUGHOUT 
+<br><br>
 
 # <b>Analysis 3</b>
+
 <br><br>
 Now that we've demonstrated that diversity exists, and is impacted by several different variables, it would be prudent to know how many different alpha-diversity metrics we're working with. The estimate_richness() and plot_richness() functions are helpful in this analysis. This will help us to understand the ecological structure of the community in terms of richness and / or evenness. 
 <br><br><br>
-## Species Richness
+
+## Alpha Diversity and Species Richness
+
 <br><br>
 
 ```{r primary richness, echo=TRUE}

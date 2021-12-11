@@ -60,7 +60,7 @@ plot_bar2 <- function (physeq, x = "Sample", y = "Abundance", fill = NULL,
 
 ## Bacterial and Fungal Community Data
 
-We're dealing with several datasets that illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **bacterial** and **fungal** communities by *Phyla*. 
+We're dealing with several datasets that illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **bacterial** and **fungal** communities by Phyla. 
 
 The sample data contains a list of variables that present themselves as interesting predictors of community assembly, which we will use microbe type and taxa as a proxy for. Below you will see the parameters for samples taken from two hosts at seven different sites in south east Asia.
 
@@ -69,11 +69,39 @@ full <- readRDS("./bact_and_fungi_clean_ps_object")
 
 full_sam <- full@sam_data %>% as("data.frame")
 
-kableExtra::kable(full_sam[1:5, ]) %>% 
-  kableExtra::kable_classic()
+full_sam %>% 
+  select(Location, Host, Structure, Microbe, Lat, Lon) %>% 
+  kableExtra::kable() %>% 
+  kableExtra::kable_classic() %>% 
+  kableExtra::kable_styling() %>% 
+  kableExtra::scroll_box(width = "700px", height = "300px")
+
+# full_sam %>% 
+#   select(Host, Location, Structure) %>% 
+#   filter(Location != "Blank") %>% 
+#   filter(Host != "Blank") %>% 
+#   table() %>% 
+#   as.data.frame()
+
+full_sam %>% 
+  select(Host, Location, Structure) %>% 
+  filter(Location != "Blank") %>% 
+  filter(Host != "Blank") %>% 
+  table() %>% 
+  as.data.frame() %>% 
+  ggplot(aes(x=Location, y=Freq, color=Host)) +
+  geom_point() +
+  facet_wrap(~Structure) +
+  labs(y = "Number of Successful Samples") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
 ```
 
 Now that we can see the observed parameters, can can begin to ask questions about the data. For the purposes of this analysis, we'll be focusing on Structure, Microbe, Lat and Long. 
+
+
+THE FINAL PLOT AND TABLE ARE BASED OFF OF INCONSISTENCIES IN SAMPLE RUNS. You can't make direct comparison of samples between hosts in some locations (Merang, Redang, etc.). The testing must have preferred sediment over fruit, since consistency. There's a caveat for several locations on our claims where data isn't there for every host: this could be due to lost or damaged samples, absence of host (Sonneratia on Merang), poor sequence data or bioinformatic analysis (based on confidence intervals). 
  
 <br><br>
 
@@ -82,14 +110,11 @@ It may also be useful to understand what taxonomic groups are present in our sam
 ```{r tax_table, echo=FALSE}
 full_tax <- as.data.frame(full@tax_table)
 
-#plot_tree(full_tax, color = "Kingdom", size = "Structure", sizebase = 2, label.tips = "taxa_names")
-#?plot_tree()
-#phy_tree(full@tax_table)
 ```
-HELP WITH PLOT_TREE
+
 <br>
 
-# <b>Analysis 1</b>
+# <b>Analysis 1: Factors Impacting Diversity & Distribution</b>
 
 
 <br>
@@ -182,19 +207,20 @@ MUST FIGURE OUT HOW TO STOP THE TOP OF GRAPH FROM GETTING CUT-OFF
 There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance by Kingdom. 
 
 ```{r nonbact parameters, echo=TRUE}
-# full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
+full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
 
 # quick plot to look at kingdom-level taxonomy
-tax_table(full) %>% 
-  merge_taxa("Phylum") %>% 
+full_nonarch %>% 
+  subset_samples(Location != "Blank") %>% 
+  merge_taxa("Genus") %>% 
+  merge_samples("Location") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>%
-  plot_bar(fill="Kingdom")
-
+  plot_bar2(fill="Kingdom")
 
 ```
 
 SO.. HOW DOES STRUCTURE AFFECT DIVERSITY?? ... AND WHY DOESN'T THIS GRAPH WORK?
-NEED TO MERGE SAMPLES BEFRE THIS WILL WORK, MERGE BY KINGDOM?
+  REMOVE BLANK
 
 <br><br>
 
@@ -223,7 +249,7 @@ full_nonarch %>%
   plot_bar(fill="Phylum") +
   facet_wrap(~"Microbe")
 
-newmerge <- paste0(full@sam_data$Host, "_", full@sam_data$Structure, "_", full@sam_data$Microbe)
+newmerge <- paste0(full@sam_data$Host, "_", full@sam_data$Structure)
 
 full@sam_data$newmerge <- newmerge
 
@@ -241,23 +267,22 @@ Alright, so that graph is pretty hard to read. Merging those variables made the 
 
 ```{r fix data, echo=TRUE}
 # reassign the earlier plot
-full2 <- full %>% 
-  subset_samples(Host != "Blank") %>% 
-  merge_samples("newmerge") %>% 
-  transform_sample_counts(function(x){x/sum(x)}) %>% 
-  plot_bar(fill="Phylum") +
-  scale_fill_viridis_d()
+# full2 <- full %>% 
+#   subset_samples(Host != "Blank") %>% 
+#   merge_samples("newmerge") %>% 
+#   transform_sample_counts(function(x){x/sum(x)}) %>% 
+#   plot_bar(fill="Phylum") +
+#   scale_fill_viridis_d()
 
 # this will fix the otu_table slot
 full2 <- full %>% 
   subset_samples(Host != "Blank") %>% 
-  merge_samples("newmerge") %>% 
-  transform_sample_counts(function(x){x/sum(x)})
+  merge_samples("newmerge") 
 
 # this code repairs the variables that were damaged upon merging
 full2@sam_data$Host <- row.names(full2@sam_data) %>% str_split("_") %>% map_chr(1)
 full2@sam_data$Structure <- row.names(full2@sam_data) %>% str_split("_") %>% map_chr(2)
-full2@sam_data$Microbe <- row.names(full2@sam_data) %>% str_split("_") %>% map_chr(3)
+#full2@sam_data$Microbe <- row.names(full2@sam_data) %>% str_split("_") %>% map_chr(3)
 
 # this graph shows separate columns for each host, and is wrapped by structure
 full2 %>% 
@@ -267,6 +292,8 @@ full2 %>%
   facet_wrap(~Structure)
 #added linw 248
 ```
+
+CONSIDER EDITING OUT THE LARGE GRAPHS
 <br><br><br> Now that we can see the diversity of phyla split by host and structure, we can further our analysis to include the microbes. 
 <br><br>To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
 
@@ -274,13 +301,14 @@ full2 %>%
 
 # here is our bacterial plot
 bact_plot <- full2 %>% 
-  transform_sample_counts(function(x){x/sum(x)}) %>% 
   subset_taxa(Kingdom =="Bacteria") %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
-  facet_wrap(~Structure) 
-#   labs(title = "Bacterial Community by Host Structure") +
-#  theme(plot.title = element_text(size = 3))
+  facet_wrap(~Structure) +
+  labs(title = "Bacterial Community by Host Structure") +
+  theme(plot.title = element_text(size = 10, face = "bold"), 
+        plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 
 bact_plot
 
@@ -301,11 +329,12 @@ Both bacterial and fungal communities appear to be more diverse in submerged env
 
 # here is our fungal plot
 fung_plot <- full2 %>% 
-  transform_sample_counts(function(x){x/sum(x)}) %>% 
   subset_taxa(Kingdom =="Fungi") %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
-  facet_wrap(~Structure)
+  facet_wrap(~Structure) +
+  labs(title = "Fungal Community by Host Structure")
 #  theme(title = "Fungal Community by Host Structure")
 
 fung_plot
@@ -349,6 +378,24 @@ plot_richness(full, measures = c("Observed","Shannon"),
               color = "Microbe", 
               sortby = "Observed") +
   theme(axis.text.x = element_blank())
+
+# get code with plot.richness and in gemo_point section of code, add metric for alpha so that points can be read more easily
+
+alpha <- estimate_richness(full, measures = c("Observed", "Shannon"))
+alpha$SampleID <- row.names(alpha)
+
+full_sam2 <- full_join(full_sam, alpha, by="SampleID")
+
+full_sam2 %>% names
+full_sam2 %>%
+  arrange(Observed) %>% 
+  mutate(SampleID=factor(SampleID, levels=SampleID)) %>% 
+  ggplot(aes(x=SampleID, y=Observed, color=Structure)) +
+  geom_point() +
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
+
+
 # colored by structure
 plot_richness(full, 
               measures = c("Observed","Shannon"), 
@@ -358,7 +405,8 @@ plot_richness(full,
 ```
 
 These graphs demonstrate the greater speciosity and diversity of fungal species, as well as the richness in sediments. 
-HELP WITH HOW TO READ THEM EXACTLY
+HELP WITH HOW TO READ THEM EXACTLY, CHECK OUT X-AXIS AND MAKE POINTS MORE READABLE BY WRIT
+DOES SEDIMENT MATTER FOR WHICH SPECIES THE PLANT NEEDS - ARE MICROBES A SUBSET OF SEDIMENT WHERE THEY'RE FOUND AND HOW WOULD THAT IMPACT NURSERIES
 <br><br>
 Grouping by the microbe and utilizing a boxplot clarifies the data visually. 
 
@@ -373,21 +421,11 @@ plot_richness(full,
 ```
 
 
-## Ordination
+## Conclusion
 
-EXPLAIN ORDINATION HERE AND SAY WHAT I WANT TO USE IT FOR
+3 BULLET POINTS
 
-```{r rich, echo=TRUE}
-plot_richness(full, 
-              x = "Microbe",
-              measures = c("Observed","Shannon"), 
-              color = "Structure", 
-              sortby = "Observed") +
-  geom_boxplot(alpha = .5) +
-  theme_minimal()
-```
-
-
+NAME ANALYSES (NOT NUMBERS)
 
 
 

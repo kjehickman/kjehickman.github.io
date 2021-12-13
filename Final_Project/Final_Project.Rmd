@@ -16,16 +16,16 @@ TOC: TRUE
 ```{r optionsetup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ```
+<br>
 
-# Bacterial-Fungal Interactions in Mangrove Roots 
+# <b>Bacterial-Fungal Interactions in Mangrove Roots</b>
 
-## <b>Introduction</b>
+## Introduction
 
 <br>
-This project aims to illuminate potential interactions between bacterial and fungal species in terms of community assembly as a funciton of location, host plant or plant structure. The analysis is multi-faceted and will include various comparisons between the subjects of research.
+This analysis aims to illuminate potential interactions between bacterial and fungal species in terms of community assembly as a function of location, host plant or plant structure. The samples for this analysis were taken from mangroves trees in Southeast Asia and have been sequenced, targeting the 16S and ITS1 genes for bacteria and fungi, respectively. 
 <br><br>
 
-# <b>Data Analysis</b>
 
 ```{r setup, include=FALSE}
 library(tidyverse); packageVersion("tidyverse")
@@ -55,14 +55,18 @@ plot_bar2 <- function (physeq, x = "Sample", y = "Abundance", fill = NULL,
   return(p)
 }
 ```
-<br>
+
+# <b>Data Analysis</b>
 
 
 ## Bacterial and Fungal Community Data
 
-We're dealing with several datasets that illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **bacterial** and **fungal** communities by Phyla. 
+The data in question is comprised of several data sets, resulting from sequencing published by Lee et a. (2019 and 2020) and is forthcoming in Wainright et al. These data illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **Bacteria** and **Fungi**--**Archaea** are beyond the scope of this research. 
 
-The sample data contains a list of variables that present themselves as interesting predictors of community assembly, which we will use microbe type and taxa as a proxy for. Below you will see the parameters for samples taken from two hosts at seven different sites in south east Asia.
+<br>
+
+The data sets have been condensed into a "phyloseq" object, which is generally comprised of sample data, observational taxonomic unit (OTU) tables, taxonomy tables, and phylogenetic trees (not present in our data). The sample data contains a list of variables that present themselves as interesting predictors of community assembly--we will use microbe type and taxa as a proxy for community assembly. Below you will see the parameters for samples taken from two hosts at seven different sites across Southeast Asia.
+<br>
 
 ```{r data load, echo=TRUE, include=TRUE, eval=TRUE}
 full <- readRDS("./bact_and_fungi_clean_ps_object")
@@ -75,7 +79,18 @@ full_sam %>%
   kableExtra::kable_classic() %>% 
   kableExtra::kable_styling() %>% 
   kableExtra::scroll_box(width = "700px", height = "300px")
+```
 
+<br>
+
+Now that we have seen the observed parameters, can can begin to ask questions about the data. For the purposes of this analysis, we'll be focusing on Structure, Microbe (including taxonomy), Host, and Location.
+
+<br>
+Before diving into an analysis, it's important to understand the shortcomings in your data--otherwise errors can compound to create patterns that may skew your results. 
+
+<br>
+
+```{r data discrepancies, echo=TRUE}
 # full_sam %>% 
 #   select(Host, Location, Structure) %>% 
 #   filter(Location != "Blank") %>% 
@@ -98,17 +113,24 @@ full_sam %>%
 
 ```
 
-Now that we can see the observed parameters, can can begin to ask questions about the data. For the purposes of this analysis, we'll be focusing on Structure, Microbe, Lat and Long. 
-
-
-THE FINAL PLOT AND TABLE ARE BASED OFF OF INCONSISTENCIES IN SAMPLE RUNS. You can't make direct comparison of samples between hosts in some locations (Merang, Redang, etc.). The testing must have preferred sediment over fruit, since consistency. There's a caveat for several locations on our claims where data isn't there for every host: this could be due to lost or damaged samples, absence of host (Sonneratia on Merang), poor sequence data or bioinformatic analysis (based on confidence intervals). 
- 
 <br><br>
+In our data, there were likely several errors in gathering and storing the samples, as well as in the sequencing process and bioinformatic analysis. This has led to a few inconsistencies in the number of successful samples, as displayed in the graph above. 
 
-It may also be useful to understand what taxonomic groups are present in our samples. 
+<br>
+For example, a direct comparison of samples between hosts in some locations, such as Merang, Redang or Tioman, would not yield useful results since some hosts have 10 samples while others have none (the species with no samples may have been absent from the sampling location, which has its own implications). Acknowledging these trends in data collection and analysis are crucial to the publication and dissemination of a successful, peer-reviewed study.
+
+<br>
+It may be useful to know which taxa were present in these samples, so here is the taxonomic data retrieved:
+<br>
 
 ```{r tax_table, echo=FALSE}
 full_tax <- as.data.frame(full@tax_table)
+
+full_tax %>% 
+  kableExtra::kable() %>% 
+  kableExtra::kable_classic() %>% 
+  kableExtra::kable_styling() %>% 
+  kableExtra::scroll_box(width = "700px", height = "300px")
 
 ```
 
@@ -116,15 +138,17 @@ full_tax <- as.data.frame(full@tax_table)
 
 # <b>Analysis 1: Factors Impacting Diversity & Distribution</b>
 
-
 <br>
 
 
-## MRM distance of geographical location and sample similarity
+## Multiple Regression Model: Location v. OTU
 
-Let's start this analysis by making a matrix with the geographical locations of the samples. Then we can make another matrix with the operational taxanomic units to display sample diversity. 
+<br>
+
+To begin the analysis, I wanted to start out broad and then narrow down the factors impacting community assembly. This led me to my first question, "How does geographic location impact the species present?" To answer this question, I made a matrix containing only the geographical locations of each sample. Then I created another matrix with the operational taxonomic units to gauge the diversity of each sample. 
 <br><br>
-Once we have made those matrices, we can run a "multiple regression of matrices" test, using a response matrix (in this case otu_dist) as a function of the explanatory matrix (location_dist).
+Once I made those matrices, I regressed the matrices against each other using the response matrix (in this case, otu_dist) as a function of the explanatory matrix (location_dist).
+<br>
 
 ```{r martices, echo=FALSE}
 lat <- full@sam_data$Lat %>% as.numeric()
@@ -140,11 +164,10 @@ MRM1 <- ecodist::MRM(otu_dist ~ location_dist)
 
 MRM1
 ```
-As you move northeast, the chances of a given microbe being bacteria increases. 
+<br>
+While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. According to the R2 value, geographic location can only explain about 1% of the variation in sample diversity. Since the broad picture isn't specific enough to explain detailed trends, I decided to move down a level. 
 <br><br>
-While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. Therefore, let's run a few more tests to get a more definitive idea of what's going on. 
-<br><br>
-To illustrate the similarity visually, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples similarity to the other samples in terms of the community composition.
+The MRM is designed to compare the similarity of two samples on a scale of 0 to 1, where 0 means the two samples are exactly the same and 1 means there is no similarity between them. To illustrate the similarity visually, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples' similarity to the other samples in terms of the community composition.
 <br><br>
 ```{r heatmap, echo=FALSE}
 otu_dist %>% as.matrix() %>% heatmap()
@@ -156,15 +179,17 @@ samp <- samp %>%
                           TRUE ~ FALSE)) %>% 
    mutate(Bact = as.logical(Bact))
 ```
-Here is another chunk that will make the glm. RRATHER THAN SHOW CODE, EXPLAIN USING LAT/LONG AND GIVE THE RESULT. EXPLAIN MODELS THEN GIVE RESULT.
-
+<br>
+Statistical analysis can be a useful way of validating (or refuting) patterns we think we see in the data. In addition to an MRM, I decided to use a generalized linear model incorporating the latitude and longitude of a sample as predictors of microbe type (remember, our only options are Fungi and Bacteria).
+<br>
 ```{r glm bact, echo=FALSE}
 
 glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
 
 ```
 <br><br>
-
+Based on the intercept and positive values for Lon/Lat, the model predicts that as you move northeast the chances of a given microbe being bacterial increases.
+<br>
 
 # <b>Analysis 2</b>
 
@@ -394,7 +419,6 @@ full_sam2 %>%
   geom_point() +
   theme_minimal() +
   theme(axis.text.x = element_blank())
-
 
 # colored by structure
 plot_richness(full, 

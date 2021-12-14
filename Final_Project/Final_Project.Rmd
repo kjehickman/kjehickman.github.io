@@ -61,7 +61,7 @@ plot_bar2 <- function (physeq, x = "Sample", y = "Abundance", fill = NULL,
 
 ## Bacterial and Fungal Community Data
 
-The data in question is comprised of several data sets, resulting from sequencing published by Lee et a. (2019 and 2020) and is forthcoming in Wainright et al. These data illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **Bacteria** and **Fungi**--**Archaea** are beyond the scope of this research. 
+The data in question is comprised of several data sets, resulting from sequencing published by Lee et a. (2019 and 2020) and is forthcoming in Wainright et al. These data illustrate the presence of microbial communities on Mangrove roots. Microbial communities of interest are **Bacteria** and **Fungi**--we will not consider **Archaea** since they are beyond the scope of this research. 
 
 <br>
 
@@ -145,7 +145,28 @@ full_tax %>%
 
 <br>
 
-To begin the analysis, I wanted to start out broad and then narrow down the factors impacting community assembly. This led me to my first question, "How does geographic location impact the species present?" To answer this question, I made a matrix containing only the geographical locations of each sample. Then I created another matrix with the operational taxonomic units to gauge the diversity of each sample. 
+To begin the analysis, I wanted to start out broad and then narrow down the factors impacting community assembly. This led me to my first question, "How does geographic location impact the species present?" To answer this question, I decided to run a few models. 
+<br><br>
+Statistical analysis can be a useful way of validating (or refuting) patterns we think we see in the data. I used a generalized linear model incorporating the latitude and longitude of a sample as predictors of microbe type (remember, our only options are Fungi and Bacteria).
+<br>
+```{r glm bact, echo=FALSE}
+
+samp <- data.frame(sample_data(full))
+
+samp <- samp %>% 
+  mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
+                          TRUE ~ FALSE)) %>% 
+   mutate(Bact = as.logical(Bact))
+
+glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
+
+```
+<br>
+Based on the intercept and positive values for Lon/Lat, the model predicts that as you move northeast the chances of a given microbe being bacterial increases.
+<br><br>
+To see if this tracked across samples in a broader trend, I used a Multiple Regression Model (MRM) on distance matrices. The MRM is designed to compare the similarity of two samples on a scale of 0 to 1, where 0 means the two samples are exactly the same and 1 means there is no similarity between them. 
+<br><br>
+I began by making a matrix containing only the geographical locations (latitude and longitude) of each sample. Then I created another matrix with the operational taxonomic units to gauge the diversity of each sample. 
 <br><br>
 Once I made those matrices, I regressed the matrices against each other using the response matrix (in this case, otu_dist) as a function of the explanatory matrix (location_dist).
 <br>
@@ -159,51 +180,46 @@ location_dist <- data.frame(lat, lon) %>% dist()
 otu_dist <- otu_table(full) %>% dist()
 
 otu_dist <- vegan::vegdist(otu_table(full), na.rm = TRUE)
+```
 
+To illustrate the similarity of each of the samples, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples' similarity to the other samples in terms of the community composition.
+<br><br>
+```{r heatmap, echo=FALSE}
+otu_dist %>% as.matrix() %>% heatmap()
+
+```
+
+<br>
+Here are the results of the regression of otu_dist against location_dist:
+<br>
+
+```{r MRM1, echo=TRUE}
 MRM1 <- ecodist::MRM(otu_dist ~ location_dist)
 
 MRM1
 ```
 <br>
-While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. According to the R2 value, geographic location can only explain about 1% of the variation in sample diversity. Since the broad picture isn't specific enough to explain detailed trends, I decided to move down a level. 
+While the p-value is statistically significant, the correlation between diversity and proximity is rather weak. According to the R2 value, geographic location can only explain about 1% of the variation in sample diversity. 
 <br><br>
-The MRM is designed to compare the similarity of two samples on a scale of 0 to 1, where 0 means the two samples are exactly the same and 1 means there is no similarity between them. To illustrate the similarity visually, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples' similarity to the other samples in terms of the community composition.
-<br><br>
-```{r heatmap, echo=FALSE}
-otu_dist %>% as.matrix() %>% heatmap()
-
-samp <- data.frame(sample_data(full))
-
-samp <- samp %>% 
-  mutate(Bact = case_when(Microbe == "Bacteria" ~ TRUE,
-                          TRUE ~ FALSE)) %>% 
-   mutate(Bact = as.logical(Bact))
-```
+Since the broad picture isn't specific enough to explain detailed trends, I decided to move down a level. 
 <br>
-Statistical analysis can be a useful way of validating (or refuting) patterns we think we see in the data. In addition to an MRM, I decided to use a generalized linear model incorporating the latitude and longitude of a sample as predictors of microbe type (remember, our only options are Fungi and Bacteria).
-<br>
-```{r glm bact, echo=FALSE}
 
-glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
-
-```
-<br><br>
-Based on the intercept and positive values for Lon/Lat, the model predicts that as you move northeast the chances of a given microbe being bacterial increases.
-<br>
 
 # <b>Analysis 2</b>
 
-<br><br>
+<br>
+
 
 ## Diversity of Phyla by Structure
 
 
 <br><br>
-So rather than predict diversity by geographical proximity, how about we see how host structure plays into microbial community diversity. 
+Rather than predict diversity by geographical proximity, I'm interested to know if the structure of the host plant may play a more influential role in microbial community diversity. These structures, including Fruit, Leaf, Pneumatophore, and Sediment, create distinct environmental conditions that allow microbes to specialize. Scaled to size, they are they represent the microclimates for the microorganisms and, thus, the next variable to analyze. 
+<br><br>
+After removing the "Blanks" from the sample data for Structure, I created a stacked bar graph that displays various phyla and their relative abundance by structure. 
+<br>
 
-After removing the "Blanks" from the sample data for Structure, we can create a stacked bar graph that displays various phyla and their relative abundance by structure. 
-
-```{r phyla ~ structure, echo=TRUE}
+```{r phyla ~ structure, echo=TRUE, fig.height=7, fig.width=9}
 full_structures <- full %>% subset_samples(Structure != "Blank")
 
 # this shows phylum abundance by structure
@@ -211,9 +227,9 @@ merge_samples(full_structures, "Structure") %>%
   transform_sample_counts(fun = function(x){x/sum(x)}) %>% 
   plot_bar(fill = "Phylum")
 ```
-
+<br>
 Now that we can visualize those relationships, how accurate are our perceptions of correlation? In other words, do the patterns we project correlate to reality? Let's use a generalized linear model to find out. 
-
+<br>
 ```{r glm structure, echo=FALSE, include=TRUE}
 samp2 <- data.frame(sample_data(full_structures))
 
@@ -224,11 +240,8 @@ samp2 <- samp2 %>%
 
 glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
 ```
-MUST FIGURE OUT HOW TO STOP THE TOP OF GRAPH FROM GETTING CUT-OFF
 
-
-<br><br><br>
-
+<br><br>
 There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance by Kingdom. 
 
 ```{r nonbact parameters, echo=TRUE}
@@ -445,7 +458,7 @@ plot_richness(full,
 ```
 
 
-## Conclusion
+# <b>Conclusion</b>
 
 3 BULLET POINTS
 

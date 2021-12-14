@@ -133,8 +133,23 @@ full_tax %>%
   kableExtra::scroll_box(width = "700px", height = "300px")
 
 ```
+<br><br>
+While there were *many* different taxa identified through genetic sequencing of the samples, a more useful way to understand the community distribution would be correlating that diversity to the seven locations sampled: 
+<br><br>
+```{r tax by location, echo=FALSE}
+full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
 
-<br>
+full_nonarch %>% 
+  subset_samples(Location != "Blank") %>% 
+  merge_taxa("Genus") %>% 
+  merge_samples("Location") %>% 
+  transform_sample_counts(function(x){x/sum(x)}) %>%
+  plot_bar2(fill="Kingdom")
+
+```
+<br><br>
+This graph shows the prevalence of bacteria in terms of abundance, with some sites reporting no presence of fungal communities.
+<br><br>
 
 # <b>Analysis 1: Factors Impacting Diversity & Distribution</b>
 
@@ -227,9 +242,9 @@ merge_samples(full_structures, "Structure") %>%
   transform_sample_counts(fun = function(x){x/sum(x)}) %>% 
   plot_bar(fill = "Phylum")
 ```
-<br>
-Now that we can visualize those relationships, how accurate are our perceptions of correlation? In other words, do the patterns we project correlate to reality? Let's use a generalized linear model to find out. 
-<br>
+<br><br>
+Now that we can visualize those communities, it's valuable to gauge the accuracy are our perceptions of correlation. In other words, do the patterns we project for community assembly by plant structure correlate to reality? A generalized linear model will provide a quick answer. 
+<br><br>
 ```{r glm structure, echo=FALSE, include=TRUE}
 samp2 <- data.frame(sample_data(full_structures))
 
@@ -239,45 +254,45 @@ samp2 <- samp2 %>%
    mutate(Bact = as.logical(Bact))
 
 glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
+
+
+#names(model) <- sub("old_name", "new_name", names(model))
 ```
-
+FIX GLM NAMES
 <br><br>
-There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance by Kingdom. 
-
+The model shows statistical significance for the hosts as predictors of bacterial presence, and for *Avicennia alba* moreso than for *Sonneratia alba*. However, the model does *not* show plant structure as being a significant predictor of bacterial presence.
+<br><br>
+There are a few Archaea samples in our data and I'm going to remove those, as they're beyond the scope of this research. Then we can show a plot that gives relative abundance of Kingdoms by plant structure in a final attempt at confirmation bias. 
+<br><br>
 ```{r nonbact parameters, echo=TRUE}
 full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
 
 # quick plot to look at kingdom-level taxonomy
 full_nonarch %>% 
-  subset_samples(Location != "Blank") %>% 
+  subset_samples(Structure != "Blank") %>% 
   merge_taxa("Genus") %>% 
-  merge_samples("Location") %>% 
+  merge_samples("Structure") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>%
   plot_bar2(fill="Kingdom")
-
 ```
-
-SO.. HOW DOES STRUCTURE AFFECT DIVERSITY?? ... AND WHY DOESN'T THIS GRAPH WORK?
-  REMOVE BLANK
-
 <br><br>
+This graph seems to show noteable differentiation of community type by structure, as opposed to the previous GLM. Apparently, a little more digging is required to get our answer.
+<br><br>
+
 
 ## Relative Class Abundance by Location
 
+<br>
 Now that we've taken a look at structure, we can break down the Phyla distribution by host. We had two types of hosts in the data-collection: *Avicennia alba* and *Sonneratia alba*. 
 <br><br>
-The first graph shows the phyla distribution as differentiated by host. However, the downside to this graph is that the Phyla are sorted alphabetically rather than by microbe-type. 
-<br><br>
-The second graph has undergone some modification, based off a few suspicions: 
+The first graph shows the phyla distribution as differentiated by host. However, the downside to this graph is that the Phyla are sorted alphabetically rather than by microbe-type. So, I made some rearrangements based off of a few suspicions:
 <br><br>
   1. I suspect both the host and the structure impact the diversity of the microbial community
 <br><br>
-2. The impact of those variables will likely be different for Fungi vs. Bacteria<br>
-<br><br>
-Thus, the second graph shows a separate column for the outcome of the three variables interacting. The first 8 rows go through the structures of *Avicennia alba* by microbe, and the second 8 do the same thing for *Sonneratia alba*. 
+  2. The impact of those variables will likely be different for Fungi vs. Bacteria
 <br><br>
 
-```{r largefig, echo=FALSE}
+```{r largefig, echo=FALSE, fig.height=7, fig.width=9}
 
 # can add these fig dimensions later: fig.align='center', echo=FALSE, fig.height= "3", fig.width= "3"
 full_nonarch %>% 
@@ -291,19 +306,18 @@ newmerge <- paste0(full@sam_data$Host, "_", full@sam_data$Structure)
 
 full@sam_data$newmerge <- newmerge
 
-full %>% 
-  subset_samples(Host != "Blank") %>% 
-  merge_samples("newmerge") %>% 
-  transform_sample_counts(function(x){x/sum(x)}) %>% 
-  plot_bar(fill="Phylum") +
-  scale_fill_viridis_d()
+# full %>% 
+#   subset_samples(Host != "Blank") %>% 
+#   merge_samples("newmerge") %>% 
+#   transform_sample_counts(function(x){x/sum(x)}) %>% 
+#   plot_bar(fill="Phylum") +
+#   scale_fill_viridis_d()
 ```
-<br><br><br><br>
-LET'S MAKE THIS GRAPH LARGER: in code chunk, 
 <br><br>
-Alright, so that graph is pretty hard to read. Merging those variables made the data a little messy, so it needs to be restored. Once that is accomplished, we can split the previous graph up into several graphs that make the data a bit more digestible. 
+After merging and restoring certain variables to accommodate the aforementioned suspicions, we can split our data into a few different graphs that display microbe type by host and structure. 
+<br><br>
 
-```{r fix data, echo=TRUE}
+```{r fix data, echo=TRUE, fig.height=7, fig.width=9}
 # reassign the earlier plot
 # full2 <- full %>% 
 #   subset_samples(Host != "Blank") %>% 
@@ -327,15 +341,19 @@ full2 %>%
   transform_sample_counts(function(x){x/sum(x)}) %>% 
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
-  facet_wrap(~Structure)
+  facet_wrap(~Structure) +
+  labs(title = "Microbial Communities by Host Structure") +
+  theme(plot.title = element_text(size = 12, face = "bold"), 
+        plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 #added linw 248
 ```
 
-CONSIDER EDITING OUT THE LARGE GRAPHS
-<br><br><br> Now that we can see the diversity of phyla split by host and structure, we can further our analysis to include the microbes. 
-<br><br>To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
-
-```{r bact_plt, echo=TRUE}
+<br><br>
+Now that we can see the diversity of phyla split by host and structure, we can further our analysis to include the microbes. 
+<br><br>
+To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
+<br><br>
+```{r bact_plt, echo=TRUE, fig.height=7, fig.width=9}
 
 # here is our bacterial plot
 bact_plot <- full2 %>% 
@@ -345,7 +363,7 @@ bact_plot <- full2 %>%
   scale_fill_viridis_d()+
   facet_wrap(~Structure) +
   labs(title = "Bacterial Community by Host Structure") +
-  theme(plot.title = element_text(size = 10, face = "bold"), 
+  theme(plot.title = element_text(size = 12, face = "bold"), 
         plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 
 bact_plot
@@ -354,16 +372,13 @@ bact_plot
 #bact_plot / fung_plot
 # REMOVE THIS--ITS TOO MUCH
 ```
-
-HELP WITH AXIS TITLES
-
 <br><br>
 This plot shows fungal community assembly, differentiated by the host plant's sturcture. The most uniform communtiy appears to exist on the fruit, whereas the most speciose community exists in the sediment. This trend of diverse community in sediment is observed in bacterial communities as well.
 <br><br>
 Both bacterial and fungal communities appear to be more diverse in submerged environments, such as the pneumatophores and sediment, as compared to terrestrial structures. This finding is rather ironic, considering that much more is known, generally speaking, about terrestrial fungi than marine fungi. The number of "unidentified" species in these samples is liekly quite high.
 <br><br>
 
-```{r fung plat, echo=TRUE}
+```{r fung plat, echo=TRUE, fig.height=7, fig.width=9}
 
 # here is our fungal plot
 fung_plot <- full2 %>% 
@@ -372,8 +387,9 @@ fung_plot <- full2 %>%
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
   facet_wrap(~Structure) +
-  labs(title = "Fungal Community by Host Structure")
-#  theme(title = "Fungal Community by Host Structure")
+  labs(title = "Fungal Community by Host Structure") +
+  theme(plot.title = element_text(size = 12, face = "bold"), 
+        plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 
 fung_plot
 ```

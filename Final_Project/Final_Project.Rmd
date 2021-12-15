@@ -107,7 +107,8 @@ full_sam %>%
   ggplot(aes(x=Location, y=Freq, color=Host)) +
   geom_point() +
   facet_wrap(~Structure) +
-  labs(y = "Number of Successful Samples") +
+  labs(y = "Number of Successful Samples", 
+       title = "Host Sampling by Location") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
@@ -144,14 +145,17 @@ full_nonarch %>%
   merge_taxa("Genus") %>% 
   merge_samples("Location") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>%
-  plot_bar2(fill="Kingdom")
+  plot_bar2(fill="Kingdom") +
+  theme_minimal() +
+  labs(title = "Microbial Abundance by Location") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
 ```
 <br><br>
 This graph shows the prevalence of bacteria in terms of abundance, with some sites reporting no presence of fungal communities.
 <br><br>
 
-# <b>Analysis 1: Factors Impacting Diversity & Distribution</b>
+# <b>Analysis 1: Modeling the Data</b>
 
 <br>
 
@@ -220,7 +224,7 @@ Since the broad picture isn't specific enough to explain detailed trends, I deci
 <br>
 
 
-# <b>Analysis 2</b>
+# <b>Analysis 2: Factors Impacting Diversity & Distribution</b>
 
 <br>
 
@@ -240,7 +244,10 @@ full_structures <- full %>% subset_samples(Structure != "Blank")
 # this shows phylum abundance by structure
 merge_samples(full_structures, "Structure") %>% 
   transform_sample_counts(fun = function(x){x/sum(x)}) %>% 
-  plot_bar(fill = "Phylum")
+  plot_bar2(fill = "Phylum") +
+  theme_minimal() +
+  labs(title = "Phyla by Structure") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ```
 <br><br>
 Now that we can visualize those communities, it's valuable to gauge the accuracy are our perceptions of correlation. In other words, do the patterns we project for community assembly by plant structure correlate to reality? A generalized linear model will provide a quick answer. 
@@ -254,7 +261,6 @@ samp2 <- samp2 %>%
    mutate(Bact = as.logical(Bact))
 
 glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
-
 
 #names(model) <- sub("old_name", "new_name", names(model))
 ```
@@ -273,7 +279,10 @@ full_nonarch %>%
   merge_taxa("Genus") %>% 
   merge_samples("Structure") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>%
-  plot_bar2(fill="Kingdom")
+  plot_bar2(fill="Kingdom") +
+  theme_minimal() +
+  labs(title = "Microbial Abundance by Structure") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 ```
 <br><br>
 This graph seems to show noteable differentiation of community type by structure, as opposed to the previous GLM. Apparently, a little more digging is required to get our answer.
@@ -299,8 +308,11 @@ full_nonarch %>%
   subset_samples(Host != "Blank") %>% 
   merge_samples("Host") %>% 
   transform_sample_counts(function(x){x/sum(x)}) %>% 
-  plot_bar(fill="Phylum") +
-  facet_wrap(~"Microbe")
+  plot_bar2(fill="Phylum") +
+  facet_wrap(~"Microbe") +
+  theme_minimal() +
+  labs(title = "Microbial Abundance by Host") +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
 newmerge <- paste0(full@sam_data$Host, "_", full@sam_data$Structure)
 
@@ -314,7 +326,7 @@ full@sam_data$newmerge <- newmerge
 #   scale_fill_viridis_d()
 ```
 <br><br>
-After merging and restoring certain variables to accommodate the aforementioned suspicions, we can split our data into a few different graphs that display microbe type by host and structure. 
+After merging and restoring certain variables to accommodate the aforementioned suspicions, we can split our data into a few different graphs that display microbe type by host and structure. Variations in visualization may help us to conceptualize these communities more accurately.
 <br><br>
 
 ```{r fix data, echo=TRUE, fig.height=7, fig.width=9}
@@ -342,17 +354,19 @@ full2 %>%
   plot_bar2(x="Host", fill="Phylum")+
   scale_fill_viridis_d()+
   facet_wrap(~Structure) +
+  theme_minimal() +
   labs(title = "Microbial Communities by Host Structure") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   theme(plot.title = element_text(size = 12, face = "bold"), 
         plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
-#added linw 248
 ```
 
 <br><br>
-Now that we can see the diversity of phyla split by host and structure, we can further our analysis to include the microbes. 
+Now that we can see the diversity of phyla split by host and structure, we can further our visual analysis to include the microbes. This graph has a lot of information, so splitting it up can be very useful. To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
 <br><br>
-To show those same differences by microbe, we'll make two graphs: one for bacteria, and another for fungi.
+The following plot shows Bacterial community assembly, differentiated by the host plant's structure. The most homogeneous community appears to exist on the fruit, whereas the most speciose community exists in the sediment.
 <br><br>
+
 ```{r bact_plt, echo=TRUE, fig.height=7, fig.width=9}
 
 # here is our bacterial plot
@@ -363,19 +377,17 @@ bact_plot <- full2 %>%
   scale_fill_viridis_d()+
   facet_wrap(~Structure) +
   labs(title = "Bacterial Community by Host Structure") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   theme(plot.title = element_text(size = 12, face = "bold"), 
         plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 
 bact_plot
 
-# this will combine the plots to show phyla sorted by kingdom
-#bact_plot / fung_plot
-# REMOVE THIS--ITS TOO MUCH
 ```
+
 <br><br>
-This plot shows fungal community assembly, differentiated by the host plant's sturcture. The most uniform communtiy appears to exist on the fruit, whereas the most speciose community exists in the sediment. This trend of diverse community in sediment is observed in bacterial communities as well.
-<br><br>
-Both bacterial and fungal communities appear to be more diverse in submerged environments, such as the pneumatophores and sediment, as compared to terrestrial structures. This finding is rather ironic, considering that much more is known, generally speaking, about terrestrial fungi than marine fungi. The number of "unidentified" species in these samples is liekly quite high.
+The next plot displays fungal diversity by plant structure, and host. While some of the trends reflect trends observed in the bacterial communities from above, fungi a clearly more homogeneous. *Ascomycota* and *Basidiomycota* are the most noteworthy inhabitants of these samples, which tracks because these phyla are also among the most speciose in the fungal kingdom. 
 <br><br>
 
 ```{r fung plat, echo=TRUE, fig.height=7, fig.width=9}
@@ -388,81 +400,96 @@ fung_plot <- full2 %>%
   scale_fill_viridis_d()+
   facet_wrap(~Structure) +
   labs(title = "Fungal Community by Host Structure") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   theme(plot.title = element_text(size = 12, face = "bold"), 
         plot.margin = margin(t = 1, r = 1, b = 1, l = 1, unit = "cm"))
 
 fung_plot
 ```
-
-
-THESE AXES NEED TO BE MESSED WITH: make the y-axes say fungal/bacterial abundance, fix the legend
-*** ALSO NEED TO TRANSFORM TO RELATIVE ABUDANCE AND MAKE Y-AXIS 0-1
+<br><br>
+From these graphs, we can see that both bacterial and fungal communities appear to be more diverse in submerged environments, such as the pneumatophores and sediment, as compared to terrestrial structures like fruit and leaves. This finding is rather ironic, considering that much more is known, generally speaking, about terrestrial fungi than marine fungi. The number of "unidentified" species in these samples is likely quite high.
 <br><br>
 
-# <b>Analysis 3</b>
+# <b>Analysis 3: Diversity Metrics</b>
 
 <br><br>
-Now that we've demonstrated that diversity exists, and is impacted by several different variables, it would be prudent to know how many different alpha-diversity metrics we're working with. The estimate_richness() and plot_richness() functions are helpful in this analysis. This will help us to understand the ecological structure of the community in terms of richness and / or evenness. 
-<br><br><br>
 
 ## Alpha Diversity and Species Richness
 
+<br><br>
+Now that we've explored diversity as a function of location, host, and structure, it would be prudent to understand the different alpha-diversity metrics we're working with. The estimate_richness() and plot_richness() functions are helpful with this analysis. This will help us to understand the ecological structure of the community in terms of richness and / or evenness. 
+<br><br>
+For reference, "Shannon" and "observed" diversity are measures of alpha diversity, which represents the number of species in various sites or habitats at a local scale. On a more granular level, "Shannon diversity" quantifies the uncertainty of predicting the species identity of a given individual that's take at-random from the dataset. "Observed diversity" is representative of the species richness in a given sample.
 <br><br>
 
 ```{r primary richness, echo=TRUE}
 # this pruning prepares the data for richness
 GP <- prune_species(speciesSums(full) > 0, full)
 
-# this graph wraps by diversity type (Chao1, Shannon) and separates based on structure
+# this graph wraps by diversity type (Observed, Shannon) and separates based on structure
 GP %>% 
   subset_samples(Host != "Blank") %>%
   plot_richness(x = "Structure", 
               measures=c("Observed", "Shannon"),
-              sortby = "Observed")
+              sortby = "Observed") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "Alpha Diversity by Structure")
+  
 ```
 
+<br><br>
+This graph illustrates the increased diversity measures in sediment, reflecting the observations made in several graphs located in the "Relative Class Abundance by Location" section. 
+<br><br>
+Next, I chose to analyze richness through the distribution of microbes, and compare those patterns to richness by structure.
+<br>
 
-This graph illustrates the greater number of diversity measures in sediment, reflecting the information provided in "WHICH OTHER PLOTS SHOW HIGHER DIVERSITY IN SEDIMENT?"
-<br><br><br>
-Now we can analyze richness through the distribution of microbes (graph 1), and also by structure (graph 2).
-
-```{r richness by color, echo=TRUE}
+```{r richness by microbe, echo=TRUE}
 # colored by kingdom/microbe 
 plot_richness(full, measures = c("Observed","Shannon"), 
               color = "Microbe", 
               sortby = "Observed") +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank()) +
+  theme_minimal() +
+  labs(title = "Diversity by Microbe")
 
-# get code with plot.richness and in gemo_point section of code, add metric for alpha so that points can be read more easily
-
+```
+<br><br>
+This graph displays in increase in alpha diversity measures as we move from bacteria to fungi in the observed diversity. Shannon diversity shows a similar trend, with the majority of samples showing a greater diversity in fungal species than bacterial species. 
+<br><br>
+```{r rchness by structure, echo=TRUE}
 alpha <- estimate_richness(full, measures = c("Observed", "Shannon"))
 alpha$SampleID <- row.names(alpha)
 
 full_sam2 <- full_join(full_sam, alpha, by="SampleID")
-
-full_sam2 %>% names
-full_sam2 %>%
-  arrange(Observed) %>% 
-  mutate(SampleID=factor(SampleID, levels=SampleID)) %>% 
-  ggplot(aes(x=SampleID, y=Observed, color=Structure)) +
-  geom_point() +
-  theme_minimal() +
-  theme(axis.text.x = element_blank())
 
 # colored by structure
 plot_richness(full, 
               measures = c("Observed","Shannon"), 
               color = "Structure", 
               sortby = "Observed") +
-  theme(axis.text.x = element_blank())
+  theme(axis.text.x = element_blank()) +
+  theme_minimal() +
+  labs(title = "Diversity by Structure")
 ```
-
-These graphs demonstrate the greater speciosity and diversity of fungal species, as well as the richness in sediments. 
-HELP WITH HOW TO READ THEM EXACTLY, CHECK OUT X-AXIS AND MAKE POINTS MORE READABLE BY WRIT
-DOES SEDIMENT MATTER FOR WHICH SPECIES THE PLANT NEEDS - ARE MICROBES A SUBSET OF SEDIMENT WHERE THEY'RE FOUND AND HOW WOULD THAT IMPACT NURSERIES
 <br><br>
-Grouping by the microbe and utilizing a boxplot clarifies the data visually. 
-
+In this graph we see that observed diversity is much greater in sediment samples, on average, than in other structures (although pneumatophores seem to come in second). As for Shannon diversity, we can see the trend identitfed in the end of the second analysis: submerged structures tend to boast higher diversity.   
+<br><br>
+```{r obs rich, echo=TRUE}
+full_sam2 %>%
+  arrange(Observed) %>% 
+  mutate(SampleID=factor(SampleID, levels=SampleID)) %>% 
+  ggplot(aes(x=SampleID, y=Observed, color=Structure)) +
+  geom_point() +
+  theme_minimal() +
+  theme(axis.text.x = element_blank()) +
+  labs(title = "Observed Diversity by Structure", x = "Sample ID")
+```
+<br><br>
+Here we can see the observed diversity trend up-close. The alpha feature allows us to differentiate between data points with ease. 
+ADD ALPHA FEATURE
+<br><br>
 ```{r rich boxplot, echo=TRUE}
 plot_richness(full, 
               x = "Microbe",
@@ -470,15 +497,28 @@ plot_richness(full,
               color = "Structure", 
               sortby = "Observed") +
   geom_boxplot(alpha = .5) +
-  theme_minimal()
+  theme_minimal() +
+  labs(title = "Microbial Diversity by Structure")
 ```
-
+<br><br>
+Grouping by the microbe and utilizing a boxplot clarifies the data visually. 
+<br><br>
 
 # <b>Conclusion</b>
 
-3 BULLET POINTS
-
-NAME ANALYSES (NOT NUMBERS)
+<br><br>
+These trends, while interesting and engaging, cannot always be trusted. Factors impacting diversity in structures like sediment often operate independently of microbial diversity in mangroves. For example, much of the diversity observed in the sediment would include species that rarely interact with plants. The trees may select beneficial (or parasitic) microbes to accompany them as they mature from sapling to adult, and the winnowing of diversity "vertically" may reflect this process.
+<br><br>
+As this analysis was conducted to better understand microbial dynamics in relation to tree health, we suspect that there may be subsets of the microbial community which are endemic to a given area, and essential to the health of the mangrove sapling. This information will be integral to creating viabe nursery practices. 
+<br><br>
+Here is the culmination of our findings, thus far:
+<br><br>
+    1.
+<br><br>
+    2.
+<br><br>
+    3.
+<br><br>
 
 
 

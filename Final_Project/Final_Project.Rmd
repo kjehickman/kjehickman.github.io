@@ -269,7 +269,6 @@ glm2 <- glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial)
 summary(glm2)
 # broom::tidy(glm2)
 ```
-FIX GLM NAMES
 <br><br>
 The model shows statistical significance for the hosts as predictors of bacterial presence, and for *Avicennia alba* moreso than for *Sonneratia alba*. However, the model does *not* show plant structure as being a significant predictor of bacterial presence.
 <br><br>

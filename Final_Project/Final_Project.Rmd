@@ -68,7 +68,7 @@ The data in question is comprised of several data sets, resulting from sequencin
 The data sets have been condensed into a "phyloseq" object, which is generally comprised of sample data, observational taxonomic unit (OTU) tables, taxonomy tables, and phylogenetic trees (not present in our data). The sample data contains a list of variables that present themselves as interesting predictors of community assembly--we will use microbe type and taxa as a proxy for community assembly. Below you will see the parameters for samples taken from two hosts at seven different sites across Southeast Asia.
 <br>
 
-```{r data load, echo=TRUE, include=TRUE, eval=TRUE}
+```{r data load, echo=TRUE, include=TRUE, eval=TRUE, fig.height=7, fig.width=9}
 full <- readRDS("./bact_and_fungi_clean_ps_object")
 
 full_sam <- full@sam_data %>% as("data.frame")
@@ -90,7 +90,7 @@ Before diving into an analysis, it's important to understand the shortcomings in
 
 <br>
 
-```{r data discrepancies, echo=TRUE}
+```{r data discrepancies, echo=TRUE, fig.height=7, fig.width=9}
 # full_sam %>% 
 #   select(Host, Location, Structure) %>% 
 #   filter(Location != "Blank") %>% 
@@ -124,7 +124,7 @@ For example, a direct comparison of samples between hosts in some locations, suc
 It may be useful to know which taxa were present in these samples, so here is the taxonomic data retrieved:
 <br>
 
-```{r tax_table, echo=FALSE}
+```{r tax_table, echo=FALSE, fig.height=7, fig.width=9}
 full_tax <- as.data.frame(full@tax_table)
 
 full_tax %>% 
@@ -137,7 +137,7 @@ full_tax %>%
 <br><br>
 While there were *many* different taxa identified through genetic sequencing of the samples, a more useful way to understand the community distribution would be correlating that diversity to the seven locations sampled: 
 <br><br>
-```{r tax by location, echo=FALSE}
+```{r tax by location, echo=FALSE, fig.height=7, fig.width=9}
 full_nonarch <- subset_taxa(full, Kingdom != "Archaea")
 
 full_nonarch %>% 
@@ -177,8 +177,9 @@ samp <- samp %>%
                           TRUE ~ FALSE)) %>% 
    mutate(Bact = as.logical(Bact))
 
-glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial") %>% summary()
-
+glm1 <- glm(formula = Bact ~ Lon + Lat, data = samp, family="binomial")
+ summary(glm1)
+# broom::tidy(glm1)
 ```
 <br>
 Based on the intercept and positive values for Lon/Lat, the model predicts that as you move northeast the chances of a given microbe being bacterial increases.
@@ -203,7 +204,7 @@ otu_dist <- vegan::vegdist(otu_table(full), na.rm = TRUE)
 
 To illustrate the similarity of each of the samples, a heatmap can act as a useful tool. The otu_dist matrix as a heat map displays each samples' similarity to the other samples in terms of the community composition.
 <br><br>
-```{r heatmap, echo=FALSE}
+```{r heatmap, echo=FALSE, fig.height=7, fig.width=9}
 otu_dist %>% as.matrix() %>% heatmap()
 
 ```
@@ -260,9 +261,13 @@ samp2 <- samp2 %>%
                           TRUE ~ FALSE)) %>% 
    mutate(Bact = as.logical(Bact))
 
-glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) %>% summary()
+glm2 <- glm(formula = Bact ~ Host + Structure, data = samp2, family = binomial) 
 
-#names(model) <- sub("old_name", "new_name", names(model))
+# glm2 %>% broom::tidy() %>%
+# str_replace(Coefficients, "[Host]", "")
+# names(glm2) <- sub("Host", "", names(glm)) %>% View
+summary(glm2)
+# broom::tidy(glm2)
 ```
 FIX GLM NAMES
 <br><br>
@@ -447,10 +452,12 @@ Next, I chose to analyze richness through the distribution of microbes, and comp
 
 ```{r richness by microbe, echo=TRUE}
 # colored by kingdom/microbe 
-plot_richness(full, measures = c("Observed","Shannon"), 
+full %>% 
+  plot_richness(measures = c("Observed","Shannon"), 
               color = "Microbe", 
               sortby = "Observed") +
   theme(axis.text.x = element_blank()) +
+  geom_point(alpha = 0.5) +
   theme_minimal() +
   labs(title = "Diversity by Microbe")
 
@@ -465,11 +472,13 @@ alpha$SampleID <- row.names(alpha)
 full_sam2 <- full_join(full_sam, alpha, by="SampleID")
 
 # colored by structure
-plot_richness(full, 
-              measures = c("Observed","Shannon"), 
+full %>% 
+  subset_samples(Structure != "Blank") %>%
+  plot_richness(measures = c("Observed","Shannon"), 
               color = "Structure", 
               sortby = "Observed") +
   theme(axis.text.x = element_blank()) +
+  geom_point(alpha = 0.5) +
   theme_minimal() +
   labs(title = "Diversity by Structure")
 ```
@@ -480,19 +489,20 @@ In this graph we see that observed diversity is much greater in sediment samples
 full_sam2 %>%
   arrange(Observed) %>% 
   mutate(SampleID=factor(SampleID, levels=SampleID)) %>% 
+  filter(Structure != "Blank") %>% 
   ggplot(aes(x=SampleID, y=Observed, color=Structure)) +
-  geom_point() +
+  geom_point(alpha = 0.5) +
   theme_minimal() +
   theme(axis.text.x = element_blank()) +
   labs(title = "Observed Diversity by Structure", x = "Sample ID")
 ```
 <br><br>
 Here we can see the observed diversity trend up-close. The alpha feature allows us to differentiate between data points with ease. 
-ADD ALPHA FEATURE
 <br><br>
 ```{r rich boxplot, echo=TRUE}
-plot_richness(full, 
-              x = "Microbe",
+full %>% 
+  subset_samples(Structure != "Blank") %>%
+  plot_richness(x = "Microbe",
               measures = c("Observed","Shannon"), 
               color = "Structure", 
               sortby = "Observed") +
@@ -501,25 +511,23 @@ plot_richness(full,
   labs(title = "Microbial Diversity by Structure")
 ```
 <br><br>
-Grouping by the microbe and utilizing a boxplot clarifies the data visually. 
-<br><br>
+Grouping by microbe and utilizing a boxplot clarifies the data visually. This is a variation on the above graph titled "Diversity by Structure" although it calls different trends to attention. This graph illustrates the distribution of numerical data, including quartiles. 
+<br>
 
 # <b>Conclusion</b>
 
-<br><br>
+<br>
 These trends, while interesting and engaging, cannot always be trusted. Factors impacting diversity in structures like sediment often operate independently of microbial diversity in mangroves. For example, much of the diversity observed in the sediment would include species that rarely interact with plants. The trees may select beneficial (or parasitic) microbes to accompany them as they mature from sapling to adult, and the winnowing of diversity "vertically" may reflect this process.
 <br><br>
-As this analysis was conducted to better understand microbial dynamics in relation to tree health, we suspect that there may be subsets of the microbial community which are endemic to a given area, and essential to the health of the mangrove sapling. This information will be integral to creating viabe nursery practices. 
+As this analysis was conducted to better understand microbial dynamics in relation to tree health, we suspect that there may be subsets of the microbial community which are endemic to a given area, and essential to the health of the mangrove sapling. This information will be integral to creating viable nursery practices. 
 <br><br>
 Here is the culmination of our findings, thus far:
 <br><br>
     1. Microbial diversity is impacted by spatial factors, such as location, host species, and plant structure.
 <br><br>
-    2.
+    2. Hosts seem to play a more significant role in community assembly, followed by geographical location, and then plat structure, according to the generalized linear models. 
 <br><br>
-    3.
-<br><br>
-
-
-
+    3. Diversity metrics between bacterial and fungal colonies are inconsistent, and likely skewed. For example, fungal communities often diaply higher diversity while bacterial communities have a greater number of phyla. This could be due, in part, to the unequal distribution of taxonomic knowledge between bacteria and fungi.
+<br><br><br><br>
+FIN
 

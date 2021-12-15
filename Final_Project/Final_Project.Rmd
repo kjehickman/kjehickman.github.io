@@ -513,7 +513,7 @@ As this analysis was conducted to better understand microbial dynamics in relati
 <br><br>
 Here is the culmination of our findings, thus far:
 <br><br>
-    1.
+    1. Microbial diversity is impacted by spatial factors, such as location, host species, and plant structure.
 <br><br>
     2.
 <br><br>

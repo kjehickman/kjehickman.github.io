@@ -1,6 +1,6 @@
 ---
 title: "About Me"
-pagetitle: "Kate Hickman"
+pagetitle: "About Me"
 author: "Kate Hickman"
 output:
   html_document:

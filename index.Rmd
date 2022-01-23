@@ -7,7 +7,8 @@ output:
     toc: yes
     toc_depth: 4
     toc_float: yes
-TOC: TRUE---
+TOC: TRUE
+---
 
 ## [Home](https://kjehickman.github.io/) | [Final Project](https://kjehickman.github.io/Final_Project/Final_Project.html) | [About Me](https://kjehickman.github.io/About_Me/About_me.html) | [CV](https::/kjehickman.github.io/CV/Untitled.html)
 
@@ -19,12 +20,14 @@ TOC: TRUE---
 
 ![](pics/FL_Headshot.jpeg)<br><br>
 
-## **Skills & Interests:**
+## **Skills & Research Interests:**
 
 + Bioinformatics
 + Mycology
 + Data Science
 + Conservation Ecology
 + Science Communication
++ Radioactive Waste in the Navajo Nation
 
+<br><br><br>
 

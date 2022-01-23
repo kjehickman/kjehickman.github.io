@@ -16,7 +16,7 @@ TOC: TRUE
 # Biography
 
 ## Here is my [CV](https://drive.google.com/file/d/1kuujyhbvnKYzkNyOZTKr0C7sR4vQQy4q/view?usp=sharing)
-
+![](Docs/Hickman_Kate_CV.pdf)
 ---
 
 ```{r setup, include=FALSE}

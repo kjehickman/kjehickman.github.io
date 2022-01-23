@@ -1,17 +1,34 @@
 ---
 title: "About Me"
-output: html_document
-pagetitle: About Me
+pagetitle: "Kate Hickman"
+author: "Kate Hickman"
+output:
+  html_document:
+    code_folding: hide
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+TOC: TRUE
+---
 
+## [Home](https://kjehickman.github.io/) | [Final Project](https://kjehickman.github.io/Final_Project/Final_Project.html) | [About Me](https://kjehickman.github.io/About_Me/About_me.html)
 
+# Biography
 
-# About Me
+## Here is my [CV](https://drive.google.com/file/d/1kuujyhbvnKYzkNyOZTKr0C7sR4vQQy4q/view?usp=sharing)
 
-## Here is my CV
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r chunk setup, include=FALSE}
+library(tidyverse); packageVersion("tidyverse")
+library(ShortRead); packageVersion("ShortRead")
+library(ggplot2)
+library(knitr)
 ```
 
 

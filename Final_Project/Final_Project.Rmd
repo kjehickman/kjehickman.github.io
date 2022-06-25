@@ -1,6 +1,6 @@
 ---
-title: "RStats on Mangrove Microbiome"
-pagetitle: "BIOL 3100"
+title: "RStats on the Mangrove Microbiome"
+pagetitle: "RStats"
 author: "Kate Hickman"
 output:
   html_document:

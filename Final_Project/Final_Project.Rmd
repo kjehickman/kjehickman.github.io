@@ -18,7 +18,13 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ```
 <br>
 
-# <b>Bacterial-Fungal Interactions in Mangrove Roots</b>
+# <b>Bacterial-Fungal Interactions in Mangrove Structures</b>
+
+## MSA Abstract
+
+<br>
+The mangrove microbiome is an important indicator of ecological outcomes such as carbon sequestration, nutrient cycling and seedling success upon transplantation. This project investigates the correlation of fungal and bacterial community dynamics on mangrove structures, including fruit, leaf, pneumatophore and sediment. Mangrove samples from the Malay Peninsula were subjected to both fungal ITS1 and bacterial 16S meta-amplicon sequencing to identify patterns in diversity and community structure across space and plant components. These meta-amplicon studies were published separately with a focus on improving the understanding of how microbiomes relate to seedling transplantation success. This project is focused on comparing patterns between fungi and bacteria associated with mangroves. Preliminary findings indicate variation in phyla based on plant structure, with more homogeneity in abundance of bacterial species on leaves and fruit than other structures. There were eight bacterial species present predominantly in pneumatophores that demonstrated statistically significant differential abundance. Bacterial abundance and diversity were higher than fungi across structures. The greatest diversity was observed in the sediment, but many of the species represented may not be associated with mangroves. Fungal and bacterial clustering based on structure may provide key insights into the interactions of these colonies, and their respective roles in the microbiome. Understanding the role of the mangrove microbiome in essential processes such as nutrient cycling, plant growth promotion, and abiotic stress resistance can improve transplantation practices, supporting mangrove conservation. Future investigations will focus on the activities and interactions between these communities to identify the specific niches they occupy in mangrove ecosystems. 
+<br><br>
 
 ## Introduction
 

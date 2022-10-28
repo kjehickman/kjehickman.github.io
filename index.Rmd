@@ -14,11 +14,14 @@ TOC: TRUE
 
 ## **Contact Info**
 
++ Email: katelynjhickman@gmail.com
++ LinkedIn: https://www.linkedin.com/in/katelynjhickman/
+
 ### Kate Hickman
 ### katelynjhickman@gmail.com
 ### Twitter: [K. J. Hickman](https://twitter.com/KJEHickman)
 
-![](pics/FL_Headshot.jpeg)<br><br>
+![](pics/PSB_Headshot.jpeg)<br><br>
 
 ## **Skills & Research Interests:**
 
@@ -27,7 +30,7 @@ TOC: TRUE
 + Data Science
 + Conservation Ecology
 + Science Communication
-+ Radioactive Waste in the Navajo Nation
++ Indigenous Ways of Knowing
 
 <br><br><br>
 

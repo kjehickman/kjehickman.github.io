@@ -1,28 +1,85 @@
 ---
-title: "Moew CV"
-output: html_document
+title: "KJE Hickman's Academic History"
+pagetitle: "CV"
+author: "Kate Hickman"
+output:
+  html_document:
+    theme: darkly
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+TOC: TRUE
 ---
+
+## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [About Me](https://kjehickman.github.io/About_Me/index.html) | [CV](https::/kjehickman.github.io/CV/index.html)
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Education
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#### Utah Valley University
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+* 2020 – 2023, __Bioinformatics B.S.__
+  + _summa cum laude_
+  + Minor in Biology
+  + Minor in Computer Science
+<br><br>
+* 2018. __Integrated Studies B.S.__
+  + _summa cum laude_
+  + Emphasis in Earth Science
+  + Emphasis in Peace & Justice Studies
+<br><br>
+* 2018. __Philosophy B.A.__
+  + _summa cum laude_
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
+## Publications
 
-You can also embed plots, for example:
+* (forthcoming) Hickman, K.J.E. (2022) __The Integral Role of the Coastal Microbiome in Mangrove Conversation__. United Nations, “Why It Matters” Annual Conference Proceedings.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+* (in prep for Microbiology) Wainwright, B., Millar, T., Hickman, K. J. E., Bowen, L., Zahn, G. __Microbial Associations in Mangrove Ecosystems__. 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+* (in prep for Environmental Earth Sciences) Cadet, E., Hickman, K. J. E., Rawson, C., Batte, L., Seawolf, S., Larsen, T. (2021). __Trace Metal Concentrations in Upland and Wetland Sediments of Utah Lake__. National Science Foundation, Utah Lake Project.
+
+## Research
+
+*	__Hickman, K. J. E.__, Leon, J., Zahn, G. (2022) _A Blue Carbon Pathway in Mangrove Microbial Communities_. 
+
+* Bingham, C., __Hickman, K. J. E.__, Leon, J., Pimentel, I., Garcia, J., Rawson, C. (2022) _A Toxic Legacy: Nuclear Pollution in the Navajo Nation_. Oxford University, Map the System. 
+
+* Cadet, E., __Hickman, K. J. E.__ (2022). _Trace Metal Concentrations in Fish and Water of Utah Lake_. National Science Foundation, Utah Lake Project.
+
+* DeVynck, D., __Hickman, K. J. E.__ (2019). _Permaculture Plant Guilds in Traditional Furrows_. Orem Permaculture Project. 
+
+*	__Hickman, K. J. E.__ (2018). _Agriculture in Guinea-Bissau: The Viability of Agroforestry with Cacao and Cashew_. Utah Valley University Honors Program.
+
+* Emerman, S. H., __Hickman, K. J. E.__, Pacheco, W., Patterson, C., and Tolman, A. (2018). _Estimation of the Stream Water Quality Baseline in the Henry Mountains, Utah_. Utah Valley University.
+
+* __Hickman, K. J. E.__, Minch, M. (2017). _PeaceTech and the Future of Peacebuilding and Sustainable Development_. Utah Valley University.
+
+* Hansen, J., __Hickman, K. J. E.__ (2017). _Tracking Intuition on the Trolley Problem_. Utah Valley University.
+
+## Teaching & Instruction
+
+* 2022. Co-instructor, Microbiome Bootcamp, Washington State University
+<br><br>
+
+*	2017 - 2020. ELL Teacher, Macote Entrepreneur Center, Bissau, Guinea-Bissau
+    +	ENG Level 0
+    + ENG Level 1
+    + ENG Level 2
+    + ENG Advanced Literature
+<br><br>
+
+*	2017 - 2018. Instructional Assistant, Principles of Formal Logic, Utah Valley University, Orem, UT
+    +	PHIL 1250: Introduction to Logic and Critical Thinking
+<br><br>
+
+*	2016 - 2018. Instructional Assistant, Utah Valley University, Orem, UT
+    +	PHIL 2050: Ethics & Values
+
+
+<br><br>

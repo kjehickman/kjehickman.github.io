@@ -3,7 +3,7 @@ title: "Kate Jo Hickman"
 pagetitle: "Home"
 output:
   html_document:
-    code_folding: hide
+    theme: darkly
     toc: yes
     toc_depth: 4
     toc_float: yes
@@ -16,7 +16,7 @@ TOC: TRUE
 
 ### Email: katelynjhickman@gmail.com
 
-### LinkedIn: https://www.linkedin.com/in/katelynjhickman/
+### LinkedIn: [linked.com/in/katelynjhickman](https://www.linkedin.com/in/katelynjhickman/)
 
 ### Twitter: [K. J. Hickman](https://twitter.com/KJEHickman)
 

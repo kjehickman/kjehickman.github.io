@@ -135,6 +135,7 @@ full_tax %>%
   kableExtra::kable() %>% 
   kableExtra::kable_classic() %>% 
   kableExtra::kable_styling() %>% 
+  kableExtra::column_spec(column = c(1, 2, 3, 4, 5, 6, 7), color="white") %>% 
   kableExtra::scroll_box(width = "700px", height = "300px")
 
 ```

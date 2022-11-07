@@ -65,6 +65,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Teaching & Instruction
 
 * 2022. Co-instructor, Microbiome Bootcamp, Washington State University
+    + DADA2 Workflow: Data Analysis and Visualization
 <br><br>
 
 *	2017 - 2020. ELL Teacher, Macote Entrepreneur Center, Bissau, Guinea-Bissau

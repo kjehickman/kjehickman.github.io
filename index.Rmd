@@ -34,7 +34,7 @@ TOC: TRUE
 
 <br>
 
-![](pics/PSB_Headshot.jpg)
+![](pics/PSB_Headshot.jpg){width=50%}
 
 <br>
 

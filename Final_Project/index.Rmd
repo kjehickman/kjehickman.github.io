@@ -12,7 +12,7 @@ output:
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [CV](https://kjehickman.github.io/CV/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
+## [Home](https://kjehickman.github.io/) | [CV](https://kjehickman.github.io/CV/index.html) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
 
 ```{r optionsetup, include=FALSE}
 knitr::opts_chunk$set(message=FALSE, warning=FALSE)
@@ -85,6 +85,7 @@ full_sam %>%
   kableExtra::kable() %>% 
   kableExtra::kable_classic() %>% 
   kableExtra::kable_styling() %>% 
+  kableExtra::column_spec(column = c(1, 2, 3, 4, 5, 6), color="white") %>% 
   kableExtra::scroll_box(width = "700px", height = "300px")
 ```
 

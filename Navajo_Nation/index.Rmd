@@ -1,0 +1,43 @@
+---
+title: "Nuclear Pollution in the Navajo Nation"
+pagetitle: "Navajo Nation"
+output:
+  html_document:
+    theme: darkly
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+TOC: TRUE
+---
+
+## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [CV](https://kjehickman.github.io/CV/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
+
+
+### University of Oxford 
+#### Map The System Presentation
+![](../pics/UVU_Presentation_RadiationRevolters/1.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/2.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/3.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/4.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/5.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/6.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/7.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/8.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/9.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/10.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/11.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/12.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/13.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/14.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/15.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/16.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/17.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/18.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/19.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/20.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/21.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/22.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/23.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/24.jpg)
+![](../pics/UVU_Presentation_RadiationRevolters/25.jpg)
+<br>

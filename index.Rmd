@@ -10,7 +10,7 @@ output:
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [About Me](https://kjehickman.github.io/About_Me/index.html) | [CV](https://kjehickman.github.io/CV/index.html)
+## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [CV](https://kjehickman.github.io/CV/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
 
 ## **Contact Info**
 
@@ -20,10 +20,9 @@ TOC: TRUE
 
 ### Twitter: [KJE Hickman](https://twitter.com/KJEHickman)
 
-![](pics/PSB_Headshot.jpg)<br><br>
-
 ## **Research Foci:**
 
++ Microbiology
 + Bioinformatics
 + Mycology
 + Molecular Biology
@@ -32,5 +31,9 @@ TOC: TRUE
 + Science Communication
 + Indigenous Ways of Knowing
 
-<br><br><br>
+<br>
+
+![](pics/PSB_Headshot.jpg)
+
+<br>
 

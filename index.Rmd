@@ -30,7 +30,7 @@ TOC: TRUE
 + Data Science
 + Conservation Ecology
 + Science Communication
-+ Indigenous Ways of Knowing
++ Indigenous Ways of Knowing (IWK)
 
 <br>
 

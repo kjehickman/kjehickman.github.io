@@ -536,7 +536,7 @@ Here is the culmination of our findings, thus far:
 <br><br>
     2. Hosts seem to play a more significant role in community assembly, followed by geographical location, and then plat structure, according to the generalized linear models. 
 <br><br>
-    3. Diversity metrics between bacterial and fungal colonies are inconsistent, and likely skewed. For example, fungal communities often diaply higher diversity while bacterial communities have a greater number of phyla. This could be due, in part, to the unequal distribution of taxonomic knowledge between bacteria and fungi.
+    3. Diversity metrics between bacterial and fungal colonies are inconsistent, and likely skewed. For example, fungal communities often display higher diversity while bacterial communities have a greater number of phyla. This could be due, in part, to the unequal distribution of taxonomic knowledge between bacteria and fungi.
 <br><br><br><br>
 FIN
 

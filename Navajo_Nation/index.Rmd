@@ -13,8 +13,10 @@ TOC: TRUE
 ## [Home](https://kjehickman.github.io/) | [CV](https://kjehickman.github.io/CV/index.html) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
 
 
-### University of Oxford 
-#### Map The System Presentation
+### University of Oxford: Map The System Competition
+#### UVU Visual Maps
+<br>
+#### A Toxic Legacy: Nuclear Pollution in the Navajo Nation
 ![](../pics/UVU_Presentation_RadiationRevolters/1.jpg)
 ![](../pics/UVU_Presentation_RadiationRevolters/2.jpg)
 ![](../pics/UVU_Presentation_RadiationRevolters/3.jpg)
@@ -40,4 +42,3 @@ TOC: TRUE
 ![](../pics/UVU_Presentation_RadiationRevolters/23.jpg)
 ![](../pics/UVU_Presentation_RadiationRevolters/24.jpg)
 ![](../pics/UVU_Presentation_RadiationRevolters/25.jpg)
-<br>

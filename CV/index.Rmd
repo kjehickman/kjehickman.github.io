@@ -1,7 +1,7 @@
 ---
 title: "KJE Hickman's Academic History"
 pagetitle: "CV"
-author: "Kate Hickman"
+author: "Jo Hickman"
 output:
   html_document:
     theme: darkly
@@ -20,33 +20,45 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Education
 
+#### MIT-WHOI Joint Program
+
+* Expected 2028.  __Biological Oceanography Ph.D.__
+  + NSF Graduate Research Fellow
+  + Graduate Certificate in Science, Technology and Policy
+<br><br>
+
 #### Utah Valley University
 
-* 2020 – 2023, __Bioinformatics B.S.__
+* 2023.  __Bioinformatics B.S.__
   + _summa cum laude_
   + Minor in Biology
   + Minor in Computer Science
 <br><br>
-* 2018. __Integrated Studies B.S.__
+* 2018.  __Integrated Studies B.S.__
   + _summa cum laude_
   + Emphasis in Earth Science
   + Emphasis in Peace & Justice Studies
 <br><br>
-* 2018. __Philosophy B.A.__
+* 2018.  __Philosophy B.A.__
   + _summa cum laude_
 
 
 ## Publications
 
-* (forthcoming) Hickman, K.J.E. (2022) __The Integral Role of the Coastal Microbiome in Mangrove Conversation__. United Nations, “Why It Matters” Annual Conference Proceedings.
+* Wainwright, B. J., Millar, T., Bowen, L., Hickman, K. J. E., Lee, J. N., Yeo, Z. Y., & Zahn, G. (2023). __“The core mangrove microbiome reveals shared taxa potentially involved in nutrient cycling and promoting host survival.”__ _Environmental Microbiome_ __18__, 47. [https://doi.org/10.1186/s40793-023-00499-5](https://doi.org/10.1186/s40793-023-00499-5)
 
-* (in prep for Microbiology) Wainwright, B., Millar, T., Hickman, K. J. E., Bowen, L., Zahn, G. __Microbial Associations in Mangrove Ecosystems__. 
+* Hickman, K. J. E. (2022) __“The Integral Role of the Coastal Microbiome in Mangrove Conservation.”__ _United Nations’ First Academic Conference on the Sustainable Development Goals “Why It Matters” Conference Proceedings_. Orem, Utah, 5-7 October, 2022, pp. 475 - 493. [https://www.uvu.edu/global/docs/wim22/wim22-publication-v2.pdf](https://www.uvu.edu/global/docs/wim22/wim22-publication-v2.pdf)
 
-* (in prep for Environmental Earth Sciences) Cadet, E., Hickman, K. J. E., Rawson, C., Batte, L., Seawolf, S., Larsen, T. (2021). __Trace Metal Concentrations in Upland and Wetland Sediments of Utah Lake__. National Science Foundation, Utah Lake Project.
+* (in prep for _Journal of Biogeography_) Wainwright, B., Leon, J, Hickman K. J. E., Vilela, E., Caldwell, E., Aimone, B., Bischoff, P., Morelli, M., & Zahn, G. __“Cryptic dispersal barriers affect some host-associated marine bacteria across Wallace's Line.”__
 
-## Research
+* (in prep for _Environmental Earth Sciences_) Hickman, K. J. E., Rawson, C., Batte, L., Seawolf, S., Larsen, T., Cadet, E. __Trace Metal Concentrations in Upland and Wetland Sediments of Utah Lake__. National Science Foundation, Utah Lake Project.
 
-*	__Hickman, K. J. E.__, Leon, J., Zahn, G. (2022) _A Blue Carbon Pathway in Mangrove Microbial Communities_. 
+
+## Research Projects
+
+* Alexander, H., __Hickman, K. J. E.__, Krinos, A. _Metatranscriptomics of Microbial Eukaryotes in the Open Ocean_. 
+
+*	__Hickman, K. J. E.__, Leon, J., Zahn, G. (2022) _Metagenomic Tools for Microbiome Analyses in Model versus Non-Model Systems_. 
 
 * Bingham, C., __Hickman, K. J. E.__, Leon, J., Pimentel, I., Garcia, J., Rawson, C. (2022) _A Toxic Legacy: Nuclear Pollution in the Navajo Nation_. Oxford University, Map the System. 
 
@@ -62,10 +74,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 * Hansen, J., __Hickman, K. J. E.__ (2017). _Tracking Intuition on the Trolley Problem_. Utah Valley University.
 
+
 ## Teaching & Instruction
 
 * 2022. Co-instructor, Microbiome Bootcamp, Washington State University
     + DADA2 Workflow: Data Analysis and Visualization
+<br><br>
+
+* 2022. Co-instructor, "Map the System" Workshop Series, Utah Valley University
+  + Systems Thinking & Equity-Centered Design
 <br><br>
 
 *	2017 - 2020. ELL Teacher, Macote Entrepreneur Center, Bissau, Guinea-Bissau
@@ -82,5 +99,47 @@ knitr::opts_chunk$set(echo = TRUE)
 *	2016 - 2018. Instructional Assistant, Utah Valley University, Orem, UT
     +	PHIL 2050: Ethics & Values
 
+
+## Leadership & Organizing
+
+* 2022 – 2023. __Systems and Design Fellow__,  Center for Social Impact
+<br>
+* 2022 – 2023. __Treasurer__,  Women in Physical Sciences Club 
+<br>
+* 2021 – 2023. __Academic Library Supervisor__,  Fulton Library
+<br>
+* 2021 – 2023. __Organizer__,  Girls Who Code Chapter
+<br>
+* 2021 – 2022. __Executive News Director__,  The UVU Review
+<br>
+* 2018. __Integrated Studies Department Representative__,  UVU Student Association
+<br>
+*	2017 – 2019. __Editor-in-Chief__,  Sophia: Undergraduate Journal of Philosophy
+<br>
+* 2017. __Philosophy Department Representative__,  UVU Student Association
+<br>
+* 2017. __President__, UVU Peace and Justice Club
+<br>
+
+
+## Honors & Awards
+
+*	2023. Graduate Research Fellowship Program, National Science Foundation
+<br>
+*	2023. Biology Student Excellence Award for Research, Utah Valley University
+<br>
+*	2022. Excellence in Undergraduate Research, University of Oxford
+<br>
+*	2022. President’s Scholarship Ball “Outstanding Student” Highlight, Utah Valley University
+<br>
+*	2022. Biology Department “Student of the Year” nominee, Utah Valley University
+<br>
+*	2018. College of Humanities and Social Science “Dean’s Choice” award, Utah Valley University
+<br>
+*	2018. Philosophy Department “Student of the Year” award, Utah Valley University
+<br>
+*	2017 – 2023. Honors Program, Utah Valley University
+<br>
+*	2016 – 2023. Dean’s List, Utah Valley University
 
 <br><br>

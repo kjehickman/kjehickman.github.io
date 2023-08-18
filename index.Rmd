@@ -1,40 +1,67 @@
 ---
-title: "Kate Jo Hickman"
-pagetitle: "Home"
+title: "About KJE Hickman"
+pagetitle: "About"
 output:
   html_document:
     theme: darkly
     toc: yes
-    toc_depth: 4
+    toc_depth: 3
     toc_float: yes
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [CV](https://kjehickman.github.io/CV/index.html) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
+## **Academic Bio**
+
+Jo Hickman is a graduate student in the MIT-WHOI Joint Program in Biological Oceanography. They graduated from Utah Valley University with degrees in bioinformatics, earth science, and philosophy. Past and current research projects include:
+
+* metatranscriptomic analyses of microbial eukaryotes (phytoplankton and fungi) in the open ocean
+* mangrove metagenomics for community classification and conservation ecology
+* microbial biogeography and community composition across Wallace’s Line
+* accuracy and efficacy of metagenomic tools in model versus non-model systems
+* elevated trace metal concentrations from anthropogenic sources in Utah Lake, a freshwater ecosystem
+* the social and environmental implications of nuclear waste in the Navajo Nation
+* the ecological, economic, and infrastructural possibility of agroforestry between cacao and cashew in Guinea-Bissau
+
+Jo works at the interface of microbial ecology, nutrient physiology, bioinformatics, and experimental / field work in the Alexander Lab at Woods Hole Oceanographic Institution. In particular, they conduct laboratory culture experiments on calcifying phytoplankter _Emiliania huxleyi_ and explore community ecology via metatranscriptomics, including data from [Bio-GO-SHIP](https://biogoship.org/). Jo is excited about questions related to microbial diversity, acclimation and adaptation in response to global change, and fungal distribution, function and diversity in marine environments. These interests are heightened when applied to conservation ecology and science policy. Moreover, Jo is interested in science communication and promoting computer and data science literacy.
+<br><br>
+
+## Research Themes
+
+<table>
+  <tr>
+    <td>
+      <img src="pics/PSB_Headshot.jpg" alt="Research Themes" width="300" height="450">
+    </td>
+    &nbsp; &nbsp; <td>
+      &nbsp; &nbsp; <h2></h2>
+      <ul>
+        &nbsp; &nbsp; <li>Microbial Ecology & Biogeography</li>
+        &nbsp; &nbsp; <li>Mycology</li>
+        &nbsp; &nbsp; <li>Planktology</li>
+        &nbsp; &nbsp; <li>Bioinformatics</li>
+        &nbsp; &nbsp; <li>Data Science</li>
+        &nbsp; &nbsp; <li>Biological Oceanography</li>
+        &nbsp; &nbsp; <li>Conservation Ecology</li>
+        &nbsp; &nbsp; <li>Science Communication</li>
+        &nbsp; &nbsp; <li>Indigenous Ways of Knowing (IWK)</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<br>
 
 ## **Contact Info**
+
+<br>
 
 ### Email: katelynjhickman@gmail.com
 
 ### LinkedIn: [linked.com/in/katelynjhickman](https://www.linkedin.com/in/katelynjhickman/)
 
 ### Twitter: [KJE Hickman](https://twitter.com/KJEHickman)
-
-## **Research Foci:**
-
-+ Microbiology
-+ Bioinformatics
-+ Mycology
-+ Molecular Biology
-+ Data Science
-+ Conservation Ecology
-+ Science Communication
-+ Indigenous Ways of Knowing (IWK)
-
-<br>
-
-![](pics/PSB_Headshot.jpg){width=50%}
-
-<br>
 

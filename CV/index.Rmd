@@ -11,8 +11,6 @@ output:
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [CV](https://kjehickman.github.io/CV/index.html) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

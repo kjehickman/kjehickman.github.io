@@ -1,5 +1,5 @@
 ---
-title: "Nuclear Pollution in the Navajo Nation"
+title: "A Toxic Legacy: Nuclear Pollution in the Navajo Nation"
 pagetitle: "Navajo Nation"
 output:
   html_document:
@@ -10,35 +10,126 @@ output:
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [CV](https://kjehickman.github.io/CV/index.html) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [Navajo Nation](https://kjehickman.github.io/Navajo_Nation/index.html)
 
+```{r optionsetup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
 
-### University of Oxford: Map The System Competition
-#### UVU Visual Maps
+## University of Oxford: Map The System Competition
+
+### Utah Valley University Team Materials - 2022
+* UVU Visual Maps (see below)
+* [Written Report](https://docs.google.com/document/d/1oh7NHnbFG-ELaCSuk_PAkyT3ByqXp0Q3/edit?usp=drive_link&ouid=106846315241426866926&rtpof=true&sd=true)
+* [Detailed Bibliography](https://docs.google.com/document/d/1zjnBjcH1gd9SfFDqJsWpX4s4CLqUdJjI/edit?usp=drive_link&ouid=106846315241426866926&rtpof=true&sd=true)
+
 <br>
-#### A Toxic Legacy: Nuclear Pollution in the Navajo Nation
-![](../pics/UVU_Presentation_RadiationRevolters/1.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/2.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/3.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/4.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/5.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/6.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/7.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/8.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/9.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/10.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/11.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/12.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/13.jpg)
+
+### A Toxic Legacy: Nuclear Pollution in the Navajo Nation
+
+![](../pics/NN_long/NN_Maps_long_Page_01.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_02.jpg)
+
+#### Methodology & Terms
+
+![](../pics/NN_long/NN_Maps_long_Page_03.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_04.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_05.jpg)
+
+#### Historical Context
+
+![](../pics/NN_long/NN_Maps_long_Page_07.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_08.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_09.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_10.jpg)
+
+#### Challenge Landscape
+
+![](../pics/NN_long/NN_Maps_long_Page_12.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_13.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_06.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_11.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_23.jpg)
+
+#### Stakeholder Maps
+##### Power Dynamics
+
+![](../pics/NN_long/NN_Maps_long_Page_14.jpg)
+
 ![](../pics/UVU_Presentation_RadiationRevolters/14.jpg)
+
 ![](../pics/UVU_Presentation_RadiationRevolters/15.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/16.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/17.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/18.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/19.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_20.jpg)
+
+##### Stakeholder Journeys
+
+![](../pics/NN_long/NN_Maps_long_Page_15.jpg)
+
+
+
+![](../pics/NN_long/NN_Maps_long_Page_16.jpg)
+
+#### Systems Maps
+
+![](../pics/NN_long/NN_Maps_long_Page_17.jpg)
+
+##### Isolated Loops & Supporting Stories
+
+![](../pics/NN_long/NN_Maps_long_Page_18.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_19.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_21.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_22.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_24.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_25.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_26.jpg)
+
+#### Solutions Landscape
+##### Existing Interventions
+
 ![](../pics/UVU_Presentation_RadiationRevolters/20.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_27.jpg)
+
+##### Gaps
+
 ![](../pics/UVU_Presentation_RadiationRevolters/21.jpg)
-![](../pics/UVU_Presentation_RadiationRevolters/22.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_28.jpg)
+
+##### Levers of Change
+
 ![](../pics/UVU_Presentation_RadiationRevolters/23.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_29.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_30.jpg)
+
 ![](../pics/UVU_Presentation_RadiationRevolters/24.jpg)
+
+![](../pics/NN_long/NN_Maps_long_Page_31.jpg)
+
+
+
+![](../pics/NN_long/NN_Maps_long_Page_32.jpg)
+
+#### Lessons Learned
+
+![](../pics/NN_long/NN_Maps_long_Page_33.jpg)
+
 ![](../pics/UVU_Presentation_RadiationRevolters/25.jpg)

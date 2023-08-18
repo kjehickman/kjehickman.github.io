@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jo Hickman" />
+
+
+<title>CV</title>
+
+<script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">kjehickman.github.io</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://kjehickman.github.io">Home</a>
+</li>
+<li>
+  <a href="https://kjehickman.github.io/CV">Curriculum Vitae</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Research Products
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://kjehickman.github.io/Final_Project">Microbes &amp; Mangroves</a>
+    </li>
+    <li>
+      <a href="https://kjehickman.github.io/Navajo_Nation">Uranium Mining in the Navajo Nation</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">KJE Hickman’s Academic History</h1>
+<h4 class="author">Jo Hickman</h4>
+
+</div>
+
+
+<div id="education" class="section level2">
+<h2>Education</h2>
+<div id="mit-whoi-joint-program" class="section level4">
+<h4>MIT-WHOI Joint Program</h4>
+<ul>
+<li>Expected 2028. <strong>Biological Oceanography Ph.D.</strong>
+<ul>
+<li>NSF Graduate Research Fellow</li>
+<li>Graduate Certificate in Science, Technology and Policy <br><br></li>
+</ul></li>
+</ul>
+</div>
+<div id="utah-valley-university" class="section level4">
+<h4>Utah Valley University</h4>
+<ul>
+<li><ol start="2023" style="list-style-type: decimal">
+<li><strong>Bioinformatics B.S.</strong></li>
+</ol>
+<ul>
+<li><em>summa cum laude</em></li>
+<li>Minor in Biology</li>
+<li>Minor in Computer Science <br><br></li>
+</ul></li>
+<li><ol start="2018" style="list-style-type: decimal">
+<li><strong>Integrated Studies B.S.</strong></li>
+</ol>
+<ul>
+<li><em>summa cum laude</em></li>
+<li>Emphasis in Earth Science</li>
+<li>Emphasis in Peace &amp; Justice Studies <br><br></li>
+</ul></li>
+<li><ol start="2018" style="list-style-type: decimal">
+<li><strong>Philosophy B.A.</strong></li>
+</ol>
+<ul>
+<li><em>summa cum laude</em></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="publications" class="section level2">
+<h2>Publications</h2>
+<ul>
+<li><p>Wainwright, B. J., Millar, T., Bowen, L., Hickman, K. J. E., Lee,
+J. N., Yeo, Z. Y., &amp; Zahn, G. (2023). <strong>“The core mangrove
+microbiome reveals shared taxa potentially involved in nutrient cycling
+and promoting host survival.”</strong> <em>Environmental Microbiome</em>
+<strong>18</strong>, 47. <a
+href="https://doi.org/10.1186/s40793-023-00499-5">https://doi.org/10.1186/s40793-023-00499-5</a></p></li>
+<li><p>Hickman, K. J. E. (2022) <strong>“The Integral Role of the
+Coastal Microbiome in Mangrove Conservation.”</strong> <em>United
+Nations’ First Academic Conference on the Sustainable Development Goals
+“Why It Matters” Conference Proceedings</em>. Orem, Utah, 5-7 October,
+2022, pp. 475 - 493. <a
+href="https://www.uvu.edu/global/docs/wim22/wim22-publication-v2.pdf">https://www.uvu.edu/global/docs/wim22/wim22-publication-v2.pdf</a></p></li>
+<li><p>(in prep for <em>Journal of Biogeography</em>) Wainwright, B.,
+Leon, J, Hickman K. J. E., Vilela, E., Caldwell, E., Aimone, B.,
+Bischoff, P., Morelli, M., &amp; Zahn, G. <strong>“Cryptic dispersal
+barriers affect some host-associated marine bacteria across Wallace’s
+Line.”</strong></p></li>
+<li><p>(in prep for <em>Environmental Earth Sciences</em>) Hickman, K.
+J. E., Rawson, C., Batte, L., Seawolf, S., Larsen, T., Cadet, E.
+<strong>Trace Metal Concentrations in Upland and Wetland Sediments of
+Utah Lake</strong>. National Science Foundation, Utah Lake
+Project.</p></li>
+</ul>
+</div>
+<div id="research-projects" class="section level2">
+<h2>Research Projects</h2>
+<ul>
+<li><p>Alexander, H., <strong>Hickman, K. J. E.</strong>, Krinos, A.
+<em>Metatranscriptomics of Microbial Eukaryotes in the Open
+Ocean</em>.</p></li>
+<li><p><strong>Hickman, K. J. E.</strong>, Leon, J., Zahn, G. (2022)
+<em>Metagenomic Tools for Microbiome Analyses in Model versus Non-Model
+Systems</em>.</p></li>
+<li><p>Bingham, C., <strong>Hickman, K. J. E.</strong>, Leon, J.,
+Pimentel, I., Garcia, J., Rawson, C. (2022) <em>A Toxic Legacy: Nuclear
+Pollution in the Navajo Nation</em>. Oxford University, Map the
+System.</p></li>
+<li><p>Cadet, E., <strong>Hickman, K. J. E.</strong> (2022). <em>Trace
+Metal Concentrations in Fish and Water of Utah Lake</em>. National
+Science Foundation, Utah Lake Project.</p></li>
+<li><p>DeVynck, D., <strong>Hickman, K. J. E.</strong> (2019).
+<em>Permaculture Plant Guilds in Traditional Furrows</em>. Orem
+Permaculture Project.</p></li>
+<li><p><strong>Hickman, K. J. E.</strong> (2018). <em>Agriculture in
+Guinea-Bissau: The Viability of Agroforestry with Cacao and Cashew</em>.
+Utah Valley University Honors Program.</p></li>
+<li><p>Emerman, S. H., <strong>Hickman, K. J. E.</strong>, Pacheco, W.,
+Patterson, C., and Tolman, A. (2018). <em>Estimation of the Stream Water
+Quality Baseline in the Henry Mountains, Utah</em>. Utah Valley
+University.</p></li>
+<li><p><strong>Hickman, K. J. E.</strong>, Minch, M. (2017).
+<em>PeaceTech and the Future of Peacebuilding and Sustainable
+Development</em>. Utah Valley University.</p></li>
+<li><p>Hansen, J., <strong>Hickman, K. J. E.</strong> (2017).
+<em>Tracking Intuition on the Trolley Problem</em>. Utah Valley
+University.</p></li>
+</ul>
+</div>
+<div id="teaching-instruction" class="section level2">
+<h2>Teaching &amp; Instruction</h2>
+<ul>
+<li><ol start="2022" style="list-style-type: decimal">
+<li>Co-instructor, Microbiome Bootcamp, Washington State University</li>
+</ol>
+<ul>
+<li>DADA2 Workflow: Data Analysis and Visualization <br><br></li>
+</ul></li>
+<li><ol start="2022" style="list-style-type: decimal">
+<li>Co-instructor, “Map the System” Workshop Series, Utah Valley
+University</li>
+</ol>
+<ul>
+<li>Systems Thinking &amp; Equity-Centered Design <br><br></li>
+</ul></li>
+<li>2017 - 2020. ELL Teacher, Macote Entrepreneur Center, Bissau,
+Guinea-Bissau
+<ul>
+<li>ENG Level 0</li>
+<li>ENG Level 1</li>
+<li>ENG Level 2</li>
+<li>ENG Advanced Literature <br><br></li>
+</ul></li>
+<li>2017 - 2018. Instructional Assistant, Principles of Formal Logic,
+Utah Valley University, Orem, UT
+<ul>
+<li>PHIL 1250: Introduction to Logic and Critical Thinking <br><br></li>
+</ul></li>
+<li>2016 - 2018. Instructional Assistant, Utah Valley University, Orem,
+UT
+<ul>
+<li>PHIL 2050: Ethics &amp; Values</li>
+</ul></li>
+</ul>
+</div>
+<div id="leadership-organizing" class="section level2">
+<h2>Leadership &amp; Organizing</h2>
+<ul>
+<li>2022 – 2023. <strong>Systems and Design Fellow</strong>, Center for
+Social Impact <br></li>
+<li>2022 – 2023. <strong>Treasurer</strong>, Women in Physical Sciences
+Club <br></li>
+<li>2021 – 2023. <strong>Academic Library Supervisor</strong>, Fulton
+Library <br></li>
+<li>2021 – 2023. <strong>Organizer</strong>, Girls Who Code Chapter
+<br></li>
+<li>2021 – 2022. <strong>Executive News Director</strong>, The UVU
+Review <br></li>
+<li><ol start="2018" style="list-style-type: decimal">
+<li><strong>Integrated Studies Department Representative</strong>, UVU
+Student Association <br></li>
+</ol></li>
+<li>2017 – 2019. <strong>Editor-in-Chief</strong>, Sophia: Undergraduate
+Journal of Philosophy <br></li>
+<li><ol start="2017" style="list-style-type: decimal">
+<li><strong>Philosophy Department Representative</strong>, UVU Student
+Association <br></li>
+</ol></li>
+<li><ol start="2017" style="list-style-type: decimal">
+<li><strong>President</strong>, UVU Peace and Justice Club <br></li>
+</ol></li>
+</ul>
+</div>
+<div id="honors-awards" class="section level2">
+<h2>Honors &amp; Awards</h2>
+<ul>
+<li><ol start="2023" style="list-style-type: decimal">
+<li>Graduate Research Fellowship Program, National Science Foundation
+<br></li>
+</ol></li>
+<li><ol start="2023" style="list-style-type: decimal">
+<li>Biology Student Excellence Award for Research, Utah Valley
+University <br></li>
+</ol></li>
+<li><ol start="2022" style="list-style-type: decimal">
+<li>Excellence in Undergraduate Research, University of Oxford <br></li>
+</ol></li>
+<li><ol start="2022" style="list-style-type: decimal">
+<li>President’s Scholarship Ball “Outstanding Student” Highlight, Utah
+Valley University <br></li>
+</ol></li>
+<li><ol start="2022" style="list-style-type: decimal">
+<li>Biology Department “Student of the Year” nominee, Utah Valley
+University <br></li>
+</ol></li>
+<li><ol start="2018" style="list-style-type: decimal">
+<li>College of Humanities and Social Science “Dean’s Choice” award, Utah
+Valley University <br></li>
+</ol></li>
+<li><ol start="2018" style="list-style-type: decimal">
+<li>Philosophy Department “Student of the Year” award, Utah Valley
+University <br></li>
+</ol></li>
+<li>2017 – 2023. Honors Program, Utah Valley University <br></li>
+<li>2016 – 2023. Dean’s List, Utah Valley University</li>
+</ul>
+<p><br><br></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

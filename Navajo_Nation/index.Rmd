@@ -10,6 +10,11 @@ output:
 TOC: TRUE
 ---
 
+
+```{r optionsetup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
+```
+
 ## University of Oxford: Map The System Competition
 
 ### Utah Valley University Team Materials - 2022

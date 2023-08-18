@@ -4,15 +4,15 @@ navbar:
   title: kjehickman.github.io
   right:
   - text: "Home"
-    href: https://kjehickman.github.io
+    href: https://kjehickman.github.io/_site/index.html
   - text: "Curriculum Vitae"
-    href: https://kjehickman.github.io/CV
+    href: https://kjehickman.github.io/_site/CV/index.html
   - text: "Research Products"
     menu:
     - text: "Microbes & Mangroves"
-      href: https://kjehickman.github.io/Final_Project
+      href: https://kjehickman.github.io/_site/Final_Project/index.html
     - text: "Uranium Mining in the Navajo Nation"
-      href: https://kjehickman.github.io/Navajo_Nation
+      href: https://kjehickman.github.io/_site/Navajo_Nation/index.html
 output:
   html_document:
     theme: darkly

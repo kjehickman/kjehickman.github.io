@@ -11,6 +11,5 @@ output:
 TOC: TRUE
 ---
 
-## [Home](https://kjehickman.github.io/) | [Microbes & Mangroves](https://kjehickman.github.io/Final_Project/index.html) | [About Me](https://kjehickman.github.io/About_Me/index.html) | [CV](https::/kjehickman.github.io/CV/index.html)
 
 ## Paste paper here

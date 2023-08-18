@@ -10,8 +10,9 @@ output:
 TOC: TRUE
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+
+```{r optionsetup, include=FALSE}
+knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ```
 
 ## **Academic Bio**

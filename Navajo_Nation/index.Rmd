@@ -27,56 +27,40 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ### A Toxic Legacy: Nuclear Pollution in the Navajo Nation
 
 ![](../pics/NN_long/NN_Maps_long_Page_01.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_02.jpg)
 
 #### Methodology & Terms
 
 ![](../pics/NN_long/NN_Maps_long_Page_03.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_04.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_05.jpg)
 
 #### Historical Context
 
 ![](../pics/NN_long/NN_Maps_long_Page_07.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_08.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_09.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_10.jpg)
 
 #### Challenge Landscape
 
 ![](../pics/NN_long/NN_Maps_long_Page_12.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_13.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_06.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_11.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_23.jpg)
 
 #### Stakeholder Maps
 ##### Power Dynamics
 
 ![](../pics/NN_long/NN_Maps_long_Page_14.jpg)
-
 ![](../pics/UVU_Presentation_RadiationRevolters/14.jpg)
-
 ![](../pics/UVU_Presentation_RadiationRevolters/15.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_20.jpg)
 
 ##### Stakeholder Journeys
 
 ![](../pics/NN_long/NN_Maps_long_Page_15.jpg)
-
-
-
 ![](../pics/NN_long/NN_Maps_long_Page_16.jpg)
 
 #### Systems Maps
@@ -86,50 +70,34 @@ knitr::opts_chunk$set(message=FALSE, warning=FALSE)
 ##### Isolated Loops & Supporting Stories
 
 ![](../pics/NN_long/NN_Maps_long_Page_18.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_19.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_21.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_22.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_24.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_25.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_26.jpg)
 
 #### Solutions Landscape
 ##### Existing Interventions
 
 ![](../pics/UVU_Presentation_RadiationRevolters/20.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_27.jpg)
 
 ##### Gaps
 
 ![](../pics/UVU_Presentation_RadiationRevolters/21.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_28.jpg)
 
 ##### Levers of Change
 
 ![](../pics/UVU_Presentation_RadiationRevolters/23.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_29.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_30.jpg)
-
 ![](../pics/UVU_Presentation_RadiationRevolters/24.jpg)
-
 ![](../pics/NN_long/NN_Maps_long_Page_31.jpg)
-
-
-
 ![](../pics/NN_long/NN_Maps_long_Page_32.jpg)
 
 #### Lessons Learned
 
 ![](../pics/NN_long/NN_Maps_long_Page_33.jpg)
 
-![](../pics/UVU_Presentation_RadiationRevolters/25.jpg)
